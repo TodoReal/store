@@ -82,33 +82,33 @@
             justify-content: space-between;
             align-items: center;
             padding: 16px 22px;
-            background: rgba(16,16,16,0.95);
-            border-bottom: 1px solid rgba(255,255,255,0.15);
-            backdrop-filter: blur(14px);
-            flex-shrink: 0;
-            position: relative;
-            z-index: 5;
+            background: rgba(9, 9, 9, 0.90);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(18px);
         }
         .logo { 
             font-weight: 900; 
-            font-size: 28px; 
+            font-size: 26px; 
             display: flex; 
             align-items: center; 
-            gap: 12px; 
+            gap: 10px; 
             letter-spacing: -0.8px;
             color: var(--text-main);
         }
         
         .logo i { 
             color: var(--accent-color); 
-            font-size: 28px;
+            font-size: 24px;
         }
         
         .logo span { 
             font-weight: 800; 
             color: var(--accent-color);
-            font-size: 24px;
-            letter-spacing: 0.5px;
+            font-size: 22px;
+            letter-spacing: 0.4px;
         }
         
         .top-actions { 
@@ -144,17 +144,17 @@
 
         .tab-menu {
             display: flex;
-            gap: 40px;
-            padding: 12px 22px;
+            gap: 18px;
+            padding: 14px 22px;
             overflow-x: auto;
             overflow-y: hidden;
             white-space: nowrap;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            background: rgba(18,18,18,0.96);
+            background: rgba(20,20,20,0.96);
             flex-shrink: 0;
             scrollbar-width: none;
             justify-content: center;
-            box-shadow: none;
+            border-bottom: 1px solid rgba(255,255,255,0.10);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
         }
         
         .tab-menu::-webkit-scrollbar { 
@@ -162,32 +162,36 @@
         }
         
         .tab-btn {
-            background: transparent;
+            background: rgba(255,255,255,0.03);
             color: var(--text-main);
-            border: none;
-            padding: 8px 0;
-            border-radius: 0;
-            font-weight: 600;
-            font-size: 14px;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 13px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             flex-shrink: 0;
         }
         
+        .tab-btn:focus-visible {
+            outline: none;
+            box-shadow: none;
+        }
+
         .tab-btn.active { 
-            background: var(--accent-color); 
-            color: var(--accent-text); 
-            font-weight: 700;
-            padding: 8px 16px;
-            border-radius: 16px;
+            background: rgba(245,214,179,0.18);
+            color: var(--accent-color); 
+            border-color: rgba(245,214,179,0.35);
         }
         
         .tab-btn:hover:not(.active) {
-            opacity: 0.8;
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
         
         .tab-btn:active:not(.active) { 
-            opacity: 0.6;
+            opacity: 0.7;
         }
 
         .main-scroll { 
@@ -196,7 +200,6 @@
             overflow-y: auto; 
             overflow-x: hidden;
             padding-bottom: 100px; 
-            /* hide scrollbar cross-browser but keep scroll functionality */
             -ms-overflow-style: none; /* IE and Edge */
             scrollbar-width: none; /* Firefox */
         }
@@ -234,133 +237,128 @@
         }
 
         .banner {
-            background: linear-gradient(135deg, rgba(25,25,25,0.95) 0%, rgba(16,16,16,0.95) 100%);
-            background-size: cover;
-            background-position: center;
-            border: 1px solid rgba(245,214,179,0.15);
-            border-radius: 20px;
-            padding: 0;
-            margin-bottom: 28px;
+            background-image: radial-gradient(circle at top left, rgba(0,0,0,0.35), transparent 28%), radial-gradient(circle at bottom right, rgba(0,0,0,0.35), transparent 28%), url("img/spotify.webp");
+            background-blend-mode: multiply, multiply, normal;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 30px;
+            padding: 30px 32px;
+            margin: 0 auto 26px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 24px 60px rgba(0,0,0,0.35);
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: block;
+            min-height: 300px;
+            width: 100%;
+            max-width: 1040px;
+            box-shadow: 0 24px 65px rgba(0,0,0,0.28);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
         
         .banner::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%);
+            inset: 0;
+            background: radial-gradient(circle at 18% 18%, rgba(255,255,255,0.08), transparent 24%), radial-gradient(circle at 82% 46%, rgba(245,214,179,0.12), transparent 24%);
             pointer-events: none;
             z-index: 1;
         }
         
         .banner-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            padding: 32px 40px;
             position: relative;
-            z-index: 25;
+            z-index: 2;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
             width: 100%;
-            gap: 20px;
-            text-align: center;
+            text-align: left;
+            max-width: 100%;
         }
         
         .banner-text {
-            flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
-        }
-        
-        .banner-image {
-            flex: 0 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            max-width: 200px;
-            height: 100px;
-        }
-        
-        .banner-image img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 8px 20px rgba(245,214,179,0.15));
-        }
-        
-        .banner h2 { 
-            font-size: 28px; 
-            font-weight: 900; 
-            letter-spacing: -1px; 
-            margin-bottom: 6px; 
+            align-items: flex-start;
+            gap: 18px;
+            width: 100%;
+            max-width: 620px;
+            min-width: 0;
             color: #ffffff;
-            margin-top: 8px;
         }
         
-        .banner p { 
-            color: rgba(240,240,240,0.85); 
-            font-size: 14px; 
+        .banner h2 {
+            font-size: clamp(36px, 4vw, 52px);
+            font-weight: 900;
+            letter-spacing: -1.2px;
+            margin: 0;
+            color: #ffffff;
+            line-height: 1.02;
             max-width: 100%;
-            line-height: 1.5;
-            margin-bottom: 12px;
+            text-shadow: 0 12px 35px rgba(0,0,0,0.25);
+        }
+        
+        .banner p {
+            color: rgba(255,255,255,0.92);
+            font-size: clamp(15px, 1vw, 18px);
+            max-width: 560px;
+            line-height: 1.6;
+            margin: 0;
+            font-weight: 700;
+            text-shadow: 0 8px 20px rgba(0,0,0,0.18);
         }
         
         .banner-label {
-            display: inline-block;
-            background: rgba(245,214,179,0.2);
-            color: var(--accent-color);
-            padding: 6px 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgb(248, 0, 0);
+            color: #ffffff;
+            padding: 10px 18px;
             border-radius: 999px;
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 12px;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
+            letter-spacing: 1.2px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
         }
         
         .buy-banner-btn {
-            background: linear-gradient(135deg, #f6d79d, #ffd58e);
-            color: var(--accent-text);
-            border: none;
-            padding: 14px 28px;
+            background: linear-gradient(135deg, #ffd96f 0%, #f7ba43 100%);
+            color: #121212;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 18px;
             border-radius: 999px;
-            font-weight: 800;
+            font-weight: 900;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-size: 15px;
-            box-shadow: 0 12px 30px rgba(245,214,179,0.3);
-            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            font-size: 14px;
+            box-shadow: 0 18px 50px rgba(255,223,111,0.28);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            min-width: 150px;
         }
         
         .buy-banner-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 16px 40px rgba(245,214,179,0.4);
+            box-shadow: 0 22px 52px rgba(245,214,179,0.45);
         }
         
-        .buy-banner-btn:active { 
-            transform: scale(0.97); 
+        .buy-banner-btn:active {
+            transform: scale(0.98);
         }
 
         .section-title { 
-            font-size: 28px; 
-            font-weight: 700; 
-            margin-bottom: 28px; 
+            font-size: 30px; 
+            font-weight: 800; 
+            margin-bottom: 22px; 
             letter-spacing: -0.3px;
             text-align: center;
             color: #ffffff;
             position: relative;
             padding-bottom: 0;
-            font-style: italic;
+            font-style: normal;
         }
         
         .section-title::after {
@@ -369,33 +367,37 @@
         
         .grid-products { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
             margin: 0 auto;
+            align-items: stretch;
+            grid-auto-rows: 1fr;
         }
         
         .product-card {
-            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-            border-radius: 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 24px;
             padding: 0;
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 300px;
+            min-height: 250px;
+            height: 100%;
+            width: 100%;
             transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
             cursor: pointer;
             border: 1px solid rgba(255,255,255,0.08);
             user-select: none;
             overflow: hidden;
-            box-shadow: 0 18px 35px rgba(0,0,0,0.18);
-            backdrop-filter: blur(4px);
+            box-shadow: 0 22px 45px rgba(0,0,0,0.16);
+            backdrop-filter: blur(6px);
         }
         
         .product-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(245,214,179,0.24);
-            box-shadow: 0 28px 50px rgba(0,0,0,0.25);
+            transform: translateY(-8px);
+            border-color: rgba(245,214,179,0.22);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.24);
         }
         
         .product-card:active { 
@@ -403,7 +405,7 @@
         }
         
         .product-card.disabled { 
-            opacity: 0.45; 
+            opacity: 0.55; 
             cursor: not-allowed; 
         }
         
@@ -414,46 +416,61 @@
         
         .product-image {
             width: 100%;
-            height: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(245,214,179,0.08), rgba(255,255,255,0.03));
-            padding: 16px;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+            height: 150px;
+            display: block;
             overflow: hidden;
             flex-shrink: 0;
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
         }
-        
+
         .product-img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
             display: block;
         }
         
         .product-info {
-            padding: 16px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             flex: 1;
+            min-height: 0;
+        }
+        
+        .p-category {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            margin-bottom: 10px;
         }
         
         .p-title { 
             font-weight: 800; 
-            font-size: 15px; 
-            margin-bottom: 4px; 
-            line-height: 1.25; 
-            min-height: 42px;
+            font-size: 16px; 
+            margin-bottom: 8px; 
+            line-height: 1.2; 
+            min-height: 40px;
             color: #ffffff;
         }
         
         .p-desc { 
             font-size: 13px; 
-            color: var(--text-sub); 
+            color: rgba(240,240,240,0.95); 
             margin-bottom: 12px; 
-            line-height: 1.45;
+            line-height: 1.5;
             flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 40px;
         }
         
         .p-footer { 
@@ -467,8 +484,9 @@
         
         .p-price { 
             font-weight: 800; 
-            font-size: 16px;
+            font-size: 15px;
             flex-shrink: 0;
+            color: #ffffff;
         }
         
         .p-stock { 
@@ -480,6 +498,7 @@
             letter-spacing: 0.5px;
             white-space: nowrap;
             flex-shrink: 0;
+            margin-left: auto;
         }
         
         .p-stock.in { 
@@ -917,46 +936,47 @@
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .app-container { max-width: 100%; height: 100vh; margin: 0; border-radius: 0; border: none; box-shadow: none; padding: 0; }
-            .banner-content { flex-direction: column; padding: 24px; gap: 20px; }
-            .banner { min-height: 220px; margin-bottom: 24px; }
-            .banner-image { flex: 0 0 160px; max-width: 160px; height: 160px; }
-            .banner h2 { font-size: 26px; margin-bottom: 6px; }
-            .banner p { font-size: 14px; }
+            .banner { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text image"; align-items: center; padding: 18px 16px; min-height: 170px; margin-bottom: 18px; }
+            .banner-content { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text image"; align-items: center; gap: 14px; width: 100%; text-align: left; }
+            .banner-text { align-items: flex-start; text-align: left; grid-area: text; }
+            .banner-image { width: 90px; height: 90px; grid-area: image; }
+            .banner h2 { font-size: 24px; margin-bottom: 6px; }
+            .banner p { font-size: 13px; }
             .banner-label { font-size: 10px; }
-            .logo { font-size: 24px; }
-            .logo i { font-size: 24px; }
-            .logo span { font-size: 20px; }
-            .grid-products { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .product-card { min-height: 280px; }
-            .product-image { height: 140px; }
-            .product-info { padding: 14px; }
-            .p-title { font-size: 14px; min-height: 36px; }
-            .p-desc { font-size: 12px; margin-bottom: 10px; }
-            .section-title { font-size: 24px; margin-bottom: 24px; }
-            .tab-btn { font-size: 13px; }
-            .nav-item { font-size: 12px; }
+            .logo { font-size: 22px; }
+            .logo i { font-size: 22px; }
+            .logo span { font-size: 18px; }
+            .grid-products { grid-template-columns: repeat(2, minmax(140px, 1fr)); gap: 10px; }
+            .product-card { min-height: 210px; }
+            .product-image { height: 100px; }
+            .product-info { padding: 12px; }
+            .p-title { font-size: 14px; min-height: 30px; }
+            .p-desc { font-size: 12px; margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+            .section-title { font-size: 22px; margin-bottom: 20px; }
+            .tab-btn { font-size: 12px; }
+            .nav-item { font-size: 11px; }
         }
 
         @media (max-width: 480px) {
-            .grid-products { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .product-card { min-height: 260px; }
-            .product-image { height: 120px; }
-            .product-info { padding: 12px; }
-            .p-title { font-size: 13px; min-height: 32px; }
-            .p-desc { font-size: 11px; margin-bottom: 8px; }
+            .grid-products { grid-template-columns: repeat(2, minmax(130px, 1fr)); gap: 10px; }
+            .product-card { min-height: 190px; }
+            .product-image { height: 95px; }
+            .product-info { padding: 10px; }
+            .p-title { font-size: 13px; min-height: 28px; }
+            .p-desc { font-size: 11px; margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
             .p-price { font-size: 14px; }
             .container { padding: 10px 8px 30px; }
             .banner-content { padding: 16px; gap: 16px; }
-            .banner { min-height: 180px; margin-bottom: 16px; }
-            .banner-image { flex: 0 0 140px; max-width: 140px; height: 140px; }
-            .banner h2 { font-size: 22px; margin-bottom: 4px; }
+            .banner { min-height: 170px; margin-bottom: 16px; }
+            .banner-image { flex: 0 0 130px; max-width: 130px; height: 130px; }
+            .banner h2 { font-size: 21px; margin-bottom: 4px; }
             .banner p { font-size: 13px; }
             .buy-banner-btn { padding: 10px 16px; font-size: 12px; }
             .banner-label { font-size: 9px; }
-            .logo { font-size: 20px; gap: 6px; }
-            .logo i { font-size: 20px; }
-            .logo span { font-size: 16px; }
-            .section-title { font-size: 20px; margin-bottom: 18px; }
+            .logo { font-size: 19px; gap: 6px; }
+            .logo i { font-size: 19px; }
+            .logo span { font-size: 15px; }
+            .section-title { font-size: 19px; margin-bottom: 16px; }
             .top-nav { padding: 8px 10px; }
             .tab-menu { padding: 10px 8px; gap: 8px; }
             .tab-btn { padding: 8px 12px; font-size: 12px; }
@@ -965,18 +985,18 @@
         }
 
         @media (max-width: 380px) {
-            .grid-products { gap: 8px; }
-            .product-card { min-height: 240px; }
-            .product-image { height: 100px; }
-            .product-info { padding: 10px; }
-            .p-title { font-size: 12px; min-height: 28px; line-height: 1.2; }
-            .p-desc { font-size: 10px; margin-bottom: 6px; }
+            .grid-products { grid-template-columns: repeat(2, minmax(120px, 1fr)); gap: 6px; }
+            .product-card { min-height: 175px; }
+            .product-image { height: 80px; }
+            .product-info { padding: 8px; }
+            .p-title { font-size: 12px; min-height: 24px; line-height: 1.2; }
+            .p-desc { font-size: 10px; margin-bottom: 4px; -webkit-line-clamp: 2; }
             .p-price { font-size: 12px; }
             .p-stock { font-size: 8px; padding: 2px 4px; }
             .container { padding: 8px 6px 30px; }
             .banner-content { padding: 12px; gap: 12px; }
             .banner { min-height: 160px; margin-bottom: 14px; }
-            .banner-image { flex: 0 0 120px; max-width: 120px; height: 120px; }
+            .banner-image { flex: 0 0 110px; max-width: 110px; height: 110px; }
             .banner h2 { font-size: 18px; margin-bottom: 2px; }
             .banner p { font-size: 12px; margin-bottom: 10px; }
             .buy-banner-btn { padding: 8px 12px; font-size: 11px; }
@@ -994,8 +1014,34 @@
 
         @media (min-width: 901px) {
             .app-container { max-width: 1100px; }
-            .grid-products { grid-template-columns: repeat(4, minmax(240px, 1fr)); gap: 18px; }
-            .product-image { height: 180px; }
+            .grid-products { grid-template-columns: repeat(4, minmax(210px, 1fr)); gap: 18px; }
+            .product-image { height: 170px; }
+        }
+
+        @media (min-width: 1200px) {
+            .banner {
+                padding: 26px 30px;
+                min-height: 240px;
+            }
+
+            .banner-content {
+                gap: 32px;
+            }
+
+            .banner-text {
+                max-width: 60%;
+            }
+
+            .banner-image {
+                width: 240px;
+                height: 240px;
+                padding: 20px;
+            }
+
+            .banner p {
+                font-size: 15px;
+                max-width: 100%;
+            }
         }
     </style>
 
@@ -1024,17 +1070,13 @@
                     <div class="banner" id="mainBanner">
                         <div class="banner-content">
                             <div class="banner-text">
-                                <div class="banner-label">TODAY'S PICK</div>
-                                <h2>Spotify Premium</h2>
-                                <p>1 Mes de acceso premium</p>
-                                <button class="buy-banner-btn" onclick="openModal(4)">Buy now-$7</button>
-                            </div>
-                            <div class="banner-image" id="bannerImage">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" alt="Oferta del día">
+                                <div class="banner-label" id="bannerLabel">TOP VENTAS</div>
+                                <h2 id="bannerTitle">Spotify Premium</h2>
+                                <button class="buy-banner-btn" id="bannerBuyBtn" onclick="openModal(4)">Buy now - $7.00</button>
                             </div>
                         </div>
                     </div>
-                    <h3 class="section-title">All products</h3>
+                    <h3 class="section-title">RECIEN AGREGADOS</h3>
                     <div class="grid-products" id="product-grid">
                         <!-- JS render -->
                     </div>
@@ -1042,7 +1084,7 @@
 
                 <!-- PRODUCTOS -->
                 <div id="products" class="section-content">
-                    <h3 class="section-title">All products</h3>
+                    <h3 class="section-title">TODO LOS PRODUCTOS</h3>
                     <div class="grid-products" id="product-grid-full">
                         <!-- JS render -->
                     </div>
@@ -1190,19 +1232,28 @@
 
     <script>
         // --- BASE DE DATOS LOCAL (Productos editables) ---
+        const FEATURED_PRODUCT_ID = 4; // Cambia este ID para destacar otro producto en el banner
         const DEFAULT_PRODUCTS = [
-            { id: 0, name: "NordVPN 1 Año", description: "VPN Premium, 10 dispositivos.", price: 5.00, stock: 10, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/NordVPN_logo.svg/2560px-NordVPN_logo.svg.png", features: "Cuenta premium con conexión en 10 dispositivos, soporte P2P y killswitch." },
-            { id: 1, name: "Codex Official API", description: "Acceso ilimitado por 1 semana.", price: 40.00, stock: 3, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/2560px-OpenAI_Logo.svg.png", features: "API oficial con límites ampliados para pruebas y desarrollo." },
-            { id: 2, name: "Gemini Pixel 12M", description: "Gemini AI Pro 1 Year Acc", price: 3.00, stock: 0, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Google_Gemini_logo.svg/1200px-Google_Gemini_logo.svg.png", features: "Acceso anual a Gemini Pro. Revisa disponibilidad antes de comprar." },
-            { id: 3, name: "EDU Email Account", description: "@live.hccc.edu con datos full.", price: 10.00, stock: 5, image: "https://cdn-icons-png.flaticon.com/512/3178/3178158.png", features: "Correo EDU con perfil estudiantil completo y 2FA opcional." },
-            { id: 4, name: "Spotify Premium 1 Mes", description: "Cuenta premium activa y lista para usar.", price: 7.00, stock: 8, image: "https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg", features: "Incluye acceso premium con reproducción sin anuncios y modo offline." },
-            { id: 5, name: "Windows 11 Pro", description: "Licencia digital para activación segura.", price: 12.00, stock: 6, image: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Windows_logo_-_2012_%28dark_blue%2C_gradient%29.svg", features: "Clave válida para instalación en PC compatible, actualizaciones y soporte básico." },
-            { id: 6, name: "Canva Pro", description: "Diseños premium para crear contenido rápido.", price: 9.00, stock: 4, image: "https://upload.wikimedia.org/wikipedia/commons/0/08/Canva_logo.svg", features: "Acceso a plantillas premium, elementos destacados y herramientas avanzadas de diseño." },
-            { id: 7, name: "Adobe Creative Cloud", description: "Paquete de apps para diseño y edición.", price: 15.00, stock: 5, image: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Adobe_Creative_Cloud_logo.svg", features: "Incluye acceso a aplicaciones creativas con uso profesional y opciones de colaboración." },
-            { id: 8, name: "Dropbox Pro", description: "Almacenamiento premium y sincronización.", price: 8.00, stock: 7, image: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Dropbox_Icon.svg", features: "Espacio ampliado y sincronización en múltiples dispositivos con seguridad extra." },
-            { id: 9, name: "Notion AI", description: "Organiza tareas con IA integrada.", price: 11.00, stock: 5, image: "https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png", features: "Plantillas inteligentes, colaboración y asistente de IA para productividad." },
-            { id: 10, name: "Disney+ Premium", description: "Cuenta de streaming con varias pantallas.", price: 6.00, stock: 9, image: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", features: "Streaming HD con múltiples perfiles y contenido exclusivo." },
-            { id: 11, name: "ChatGPT Plus", description: "Acceso mejorado con respuestas rápidas.", price: 18.00, stock: 4, image: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", features: "Mejor rendimiento, uso prioritario y funciones avanzadas para trabajo diario." }
+            { id: 0, category: "VPN · SUBSCRIPTION", name: "NordVPN 1 Año", description: "VPN Premium, 10 dispositivos.", price: 25.00, stock: 10, image: "img/nordvpn.webp", features: "Cuenta premium con conexión en 10 dispositivos, soporte P2P y killswitch." },
+            { id: 1, category: "MAIL", name: "Cuentas GMAIL", description: "Cuentas de correo electrónico.", price: 2.00, stock: 27, image: "img/gmail.webp", features: "Cuentas de correo electrónico con acceso a todas las funciones de Gmail." },
+            { id: 2, category: "IA", name: "Gemini AI Pro", description: "Gemini AI Pro 1 Year Acc", price: 3.00, stock: 3, image: "img/gemini.webp", features: "Acceso anual a Gemini Pro. Revisa disponibilidad antes de comprar." },
+            { id: 3, category: "STREAMING", name: "HBO Max", description: "Cuenta premium activa y lista para usar.", price: 5.00, stock: 4, image: "img/hbomax.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo." },
+            { id: 4, category: "STREAMING", name: "Spotify Premium", description: "Cuenta premium activa y lista para usar.", price: 5.00, stock: 8, image: "img/spotify.webp", features: "Incluye acceso premium con reproducción sin anuncios y modo offline." },
+            { id: 5, category: "WINDOWS", name: "Windows 11 Pro", description: "Licencia digital para activación segura.", price: 12.00, stock: 0, image: "img/windows11.webp", features: "Clave válida para instalación en PC compatible, actualizaciones y soporte básico." },
+            { id: 6, category: "DESIGN", name: "Canva Pro", description: "Acceso a plantillas premium y herramientas avanzadas de diseño.", price: 3.00, stock: 28, image: "img/canva.webp", features: "Acceso a plantillas premium, elementos destacados y herramientas avanzadas de diseño." },
+            { id: 7, category: "ENTRETENIMIENTO", name: "Paramount +", description: "Acceso a contenido premium y aplicaciones creativas.", price: 4.00, stock: 22, image: "img/paramount.webp", features: "Incluye acceso a aplicaciones creativas con uso profesional y opciones de colaboración." },
+            { id: 8, category: "STORAGE", name: "Dropbox Pro", description: "Almacenamiento premium y sincronización.", price: 8.00, stock: 7, image: "img/dropbox.webp", features: "Espacio ampliado y sincronización en múltiples dispositivos con seguridad extra." },
+            { id: 9, category: "MAIL", name: "Outlook", description: "Cuentas de correo electrónico.", price: 2.00, stock: 18, image: "img/outlook.webp", features: "Cuentas de correo electrónico con acceso a todas las funciones de Outlook." },
+            { id: 10, category: "STREAMING", name: "Disney+ Premium", description: "Cuenta de streaming con varias pantallas.", price: 6.00, stock: 9, image: "img/disney.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo." },
+            { id: 11, category: "IA", name: "ChatGPT Plus", description: "Acceso mejorado con respuestas rápidas.", price: 10.00, stock: 4, image: "img/chatgpt.webp", features: "Mejor rendimiento, uso prioritario y funciones avanzadas para trabajo diario." },
+            { id: 12, category: "STREAMING", name: "Netflix Premium", description: "Cuenta premium activa y lista para usar.", price: 7.00, stock: 5, image: "img/netflix.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo." },
+            { id: 13, category: "STREAMING", name: "Amazon Prime Video", description: "Cuenta premium activa y lista para usar.", price: 6.00, stock: 6, image: "img/primevideo.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo." },
+            { id: 14, category: "STREAMING", name: "Hulu Premium", description: "Cuenta premium activa y lista para usar.", price: 5.00, stock: 3, image: "img/hulu.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo." },
+            { id: 15, category: "STREAMING", name: "YouTube Premium", description: "Cuenta premium activa y lista para usar.", price: 3.00, stock: 10, image: "img/youtube.webp", features: "Acceso a YouTube sin anuncios, reproducción en segundo plano y contenido exclusivo." },
+            { id: 16, category: "VPN", name: "Surfshark VPN", description: "VPN Premium, por activacion.", price: 3.00, stock: 26, image: "img/surfshark.webp", features: "Cuenta premium con conexión en múltiples dispositivos, soporte P2P y killswitch." },
+            { id: 17, category: "STREAMING", name: "Tidal Premium", description: "Música de alta calidad con acceso a contenido exclusivo.", price: 3.00, stock: 13, image: "img/tidal.webp", features: "Acceso a música de alta calidad con reproducción sin anuncios y contenido exclusivo." },
+            { id: 18, category: "VIP", name: "Grupo VIP", description: "Acceso exclusivo a contenido premium.", price: 50.00, stock: 5, image: "img/vip.webp", features: "Acceso exclusivo a contenido premium y beneficios especiales." },
+            { id: 19, category: "VPN", name: "Hma PRO VPN", description: "VPN Premium, por licencia.", price: 4.00, stock: 15, image: "img/hmapro.webp", features: "Licencia válida para instalación en dispositivos compatibles, valido por 30 dias." }
         ];
         let products = [...DEFAULT_PRODUCTS];
 
@@ -1264,7 +1315,8 @@
         function renderProducts() {
             const grid = document.getElementById('product-grid');
             const gridFull = document.getElementById('product-grid-full');
-            let html = '';
+            let htmlAll = '';
+            let htmlHome = '';
 
             products.forEach((p, index) => {
                 let stockClass = 'p-stock in';
@@ -1279,12 +1331,13 @@
                     stockClass = 'p-stock low';
                 }
 
-                html += `
+                const productHtml = `
                     <div class="product-card ${disabledClass}" onclick="handleProductClick(${index})">
                         <div class="product-image">
                             <img src="${p.image}" class="product-img" alt="${p.name}">
                         </div>
                         <div class="product-info">
+                            <div class="p-category">${p.category || 'Producto'}</div>
                             <div class="p-title">${p.name}</div>
                             <div class="p-desc">${p.description}</div>
                             <div class="p-footer">
@@ -1293,11 +1346,33 @@
                             </div>
                         </div>
                     </div>
-                `;
+                `; 
+
+                htmlAll += productHtml;
+                if (index < 8) {
+                    htmlHome += productHtml;
+                }
             });
 
-            grid.innerHTML = html;
-            gridFull.innerHTML = html;
+            grid.innerHTML = htmlHome;
+            gridFull.innerHTML = htmlAll;
+        }
+
+        function updateFeaturedBanner() {
+            const product = products.find(p => p.id === FEATURED_PRODUCT_ID) || products[0];
+            if (!product) return;
+            const bannerTitle = document.getElementById('bannerTitle');
+            const bannerBuyBtn = document.getElementById('bannerBuyBtn');
+            const bannerImage = document.querySelector('#bannerImage img');
+
+            bannerTitle.innerText = product.name;
+            bannerBuyBtn.innerText = `Buy now - $${product.price.toFixed(2)}`;
+            bannerBuyBtn.setAttribute('onclick', `openModal(${products.indexOf(product)})`);
+
+            if (bannerImage) {
+                bannerImage.src = product.image;
+                bannerImage.alt = product.name;
+            }
         }
 
         // --- ACCIONES DE CLICK EN PRODUCTO ---
@@ -1542,6 +1617,7 @@
         // Inicializar: cargar productos persistidos y renderizar
         loadProductsFromStorage();
         renderProducts();
+        updateFeaturedBanner();
         
         // Cerrar modal haciendo clic fuera
         document.getElementById('purchaseModal').addEventListener('click', function(e) {
