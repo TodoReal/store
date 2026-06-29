@@ -81,13 +81,99 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 22px;
-            background: rgba(9, 9, 9, 0.90);
+            padding: 18px 22px;
+            background: rgba(16, 16, 16, 0.96);
             position: sticky;
             top: 0;
             z-index: 10;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.12);
             backdrop-filter: blur(18px);
+            gap: 16px;
+        }
+
+        .logo { 
+            font-weight: 900; 
+            font-size: 24px; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 10px; 
+            letter-spacing: -0.8px;
+            color: var(--text-main);
+            background: rgba(255,255,255,0.04);
+            border: none;
+            border-radius: 999px;
+            padding: 10px 16px;
+            box-shadow: none;
+        }
+        
+        .logo i { 
+            color: var(--accent-color); 
+            font-size: 22px;
+        }
+        
+        .logo span { 
+            font-weight: 800; 
+            color: var(--accent-color);
+            font-size: 20px;
+            letter-spacing: 0.4px;
+        }
+
+        .search-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 999px;
+            padding: 8px 12px;
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            outline: none;
+            width: 210px;
+            min-width: 140px;
+            font-size: 14px;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255,255,255,0.72);
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255,255,255,0.65);
+        }
+
+        .empty-search {
+            padding: 24px;
+            text-align: center;
+            color: rgba(255,255,255,0.72);
+            font-size: 15px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            margin: 18px;
+        }
+
+        .search-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.08);
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-1px);
+            background: rgba(255,255,255,0.12);
         }
         .logo { 
             font-weight: 900; 
@@ -142,25 +228,15 @@
             background: rgba(255,255,255,0.08);
         }
 
+
         .tab-menu {
-            display: flex;
-            gap: 18px;
-            padding: 14px 22px;
-            overflow-x: auto;
-            overflow-y: hidden;
-            white-space: nowrap;
-            background: rgba(20,20,20,0.96);
-            flex-shrink: 0;
-            scrollbar-width: none;
-            justify-content: center;
-            border-bottom: 1px solid rgba(255,255,255,0.10);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+            display: none;
         }
-        
+
         .tab-menu::-webkit-scrollbar { 
             display: none; 
         }
-        
+
         .tab-btn {
             background: rgba(255,255,255,0.03);
             color: var(--text-main);
@@ -253,6 +329,12 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            transition: opacity 0.4s ease, background-image 0.6s ease, transform 0.4s ease;
+        }
+
+        .banner.banner-fade {
+            opacity: 0.35;
+            transform: scale(0.995);
         }
         
         .banner::before {
@@ -284,6 +366,48 @@
             max-width: 620px;
             min-width: 0;
             color: #ffffff;
+        }
+
+        .juega-gana-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 200px;
+        }
+
+        .juega-gana-img {
+            width: 100%;
+            max-width: 860px;
+            overflow: hidden;
+            border-radius: 24px;
+        }
+
+        .juega-gana-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .view-full-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            color: #000000;
+            background: #0ea8e5;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 900;
+            box-shadow: 0 14px 30px rgba(36,179,98,0.24);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .view-full-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 36px rgba(36,179,98,0.28);
         }
         
         .banner h2 {
@@ -869,13 +993,12 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(18, 18, 18, 0.98);
-            border-top: 1px solid var(--card-border);
+            background: rgba(24, 24, 24, 0.98);
+            border-top: 1px solid rgba(255,255,255,0.08);
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 8px 0;
-            padding-bottom: 12px;
+            padding: 10px 0;
             z-index: 99;
             flex-shrink: 0;
             backdrop-filter: blur(10px);
@@ -943,9 +1066,12 @@
             .banner h2 { font-size: 24px; margin-bottom: 6px; }
             .banner p { font-size: 13px; }
             .banner-label { font-size: 10px; }
-            .logo { font-size: 22px; }
+            .logo { font-size: 22px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
             .logo i { font-size: 22px; }
             .logo span { font-size: 18px; }
+            .top-nav { flex-wrap: wrap; padding: 14px 14px; gap: 12px; }
+            .search-box { flex: 1 1 100%; min-width: 0; width: 100%; margin-top: 8px; }
+            .search-box input { width: 100%; min-width: 0; }
             .grid-products { grid-template-columns: repeat(2, minmax(140px, 1fr)); gap: 10px; }
             .product-card { min-height: 210px; }
             .product-image { height: 100px; }
@@ -973,11 +1099,13 @@
             .banner p { font-size: 13px; }
             .buy-banner-btn { padding: 10px 16px; font-size: 12px; }
             .banner-label { font-size: 9px; }
-            .logo { font-size: 19px; gap: 6px; }
-            .logo i { font-size: 19px; }
-            .logo span { font-size: 15px; }
+            .logo { font-size: 18px; gap: 8px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .logo i { font-size: 18px; }
+            .logo span { font-size: 14px; }
+            .top-nav { padding: 8px 10px; gap: 10px; flex-wrap: nowrap; justify-content: space-between; align-items: center; }
+            .search-box { flex: 0 0 auto; min-width: 0; width: min(220px, 50vw); max-width: 220px; margin-top: 0; }
+            .search-box input { width: 100%; min-width: 0; }
             .section-title { font-size: 19px; margin-bottom: 16px; }
-            .top-nav { padding: 8px 10px; }
             .tab-menu { padding: 10px 8px; gap: 8px; }
             .tab-btn { padding: 8px 12px; font-size: 12px; }
             .nav-item { font-size: 11px; }
@@ -1052,15 +1180,11 @@
         <!-- Header -->
         <header class="top-nav">
             <div class="logo"><i class="fa-solid fa-rocket"></i> REAL <span>Store</span></div>
+            <div class="search-box">
+                <input id="productSearch" type="search" placeholder="Buscar servicio" oninput="performSearch(this.value)" />
+                <button class="search-btn" onclick="performSearch(document.getElementById('productSearch').value)"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
         </header>
-
-        <!-- Menú de Tabs (Superior) -->
-        <div class="tab-menu">
-            <button class="tab-btn active" onclick="switchTab('home', this)">Inicio</button>
-            <button class="tab-btn" onclick="switchTab('products', this)">Productos</button>
-            <button class="tab-btn" onclick="switchTab('contact', this)">Contacto</button>
-            <button class="tab-btn" onclick="switchTab('faq', this)">FAQ</button>
-        </div>
 
         <!-- Contenido Scrollable -->
         <div class="main-scroll">
@@ -1072,7 +1196,8 @@
                             <div class="banner-text">
                                 <div class="banner-label" id="bannerLabel">TOP VENTAS</div>
                                 <h2 id="bannerTitle">Spotify Premium</h2>
-                                <button class="buy-banner-btn" id="bannerBuyBtn" onclick="openModal(4)">Buy now - $7.00</button>
+                                <p id="bannerDescription">Cuenta premium activa y lista para usar.</p>
+                                <button class="buy-banner-btn" id="bannerBuyBtn" onclick="openModal(4)">Pedir ahora - $7.00</button>
                             </div>
                         </div>
                     </div>
@@ -1082,35 +1207,53 @@
                     </div>
                 </div>
 
-                <!-- PRODUCTOS -->
+                <!-- JUEGA Y GANA -->
                 <div id="products" class="section-content">
-                    <h3 class="section-title">TODO LOS PRODUCTOS</h3>
-                    <div class="grid-products" id="product-grid-full">
-                        <!-- JS render -->
+                    <div class="juega-gana-block">
+                        <div class="juega-gana-img">
+                            <img src="img/desarrollo.webp" alt="desarrollo" />
+                        </div>
+                        <a class="view-full-btn" href="img/desarrollo.webp" target="_blank" rel="noopener noreferrer">Ver imagen completa</a>
                     </div>
                 </div>
 
-                <!-- CONTACTO -->
+                <!-- TIENDA -->
+                <div id="store" class="section-content">
+                    <h3 class="section-title">Todo los servicios</h3>
+                    <div class="grid-products" id="product-grid-full"></div>
+                </div>
+
+                <!-- SUPPORT (FAQ content shown here) -->
                 <div id="contact" class="section-content">
                     <div class="info-card">
-                        <h3><i class="fa-brands fa-whatsapp"></i> WhatsApp</h3>
-                        <p style="font-weight: bold; color: var(--text-main); font-size: 16px;">+51 955 345 060</p>
+                        <h3>¿Cómo recibo mi servicio?</h3>
+                        <p>Una vez realices el pago, envías el comprobante y te enviaremos inmediatamente las credenciales o acceso. Si existe algún retraso, te avisamos con el primer mensaje y resolvemos el envío en menos de 30 minutos.</p>
                     </div>
                     <div class="info-card">
-                        <h3><i class="fa-brands fa-telegram"></i> Telegram</h3>
-                        <p style="font-weight: bold; color: var(--text-main); font-size: 16px;">@RealStrategy</p>
-                    </div>
-                </div>
-
-                <!-- FAQ -->
-                <div id="faq" class="section-content">
-                    <div class="info-card">
-                        <h3>¿Cómo recibo mi producto?</h3>
-                        <p>Una vez realices el pago, envías el comprobante y te enviaremos las credenciales de acceso dependiendo del producto.</p>
+                        <h3>¿Qué pasa si el servicio no funciona?</h3>
+                        <p>Todos nuestros servicios tienen garantía. Si el acceso no funciona, nuestro equipo verifica el problema, restituye el servicio o genera un nuevo acceso sin costo adicional. El soporte actúa rápido para que no pierdas tiempo.</p>
                     </div>
                     <div class="info-card">
-                        <h3>¿Qué pasa si el producto no funciona?</h3>
-                        <p>Todos nuestros productos están garantizados. Si algo falla, nuestro soporte técnico actúa de inmediato. En algunos casos, creamos una nueva cuenta para restablecer el servicio, proceso que puede tomar desde minutos hasta un par de horas. Esto asegura que disfrutes del tiempo completo contratado. Si no es así, te reponemos el servicio sin costo adicional.</p>
+                        <h3>¿Puedo cambiar de servicio después de la compra?</h3>
+                        <p>Si tu compra aún no ha sido entregada o el servicio presenta error, puedes solicitar el cambio. Revisamos tu caso en menos de 24 horas y te ofrecemos la mejor alternativa disponible, siempre buscando tu satisfacción.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>¿Cómo se asegura la privacidad de mi pedido?</h3>
+                        <p>Tu pedido se maneja con discreción: solo usamos los datos necesarios para entregar la cuenta o licencia. No compartimos tu información con terceros y la protegemos dentro del proceso de atención.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>¿Qué métodos de pago son aceptados?</h3>
+                        <p>Aceptamos pagos por Telegram y WhatsApp con comprobante. También hay opciones de transferencia y billeteras si lo prefieres. Siempre te indicamos el método más rápido y seguro para tu caso.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>¿Cuánto tiempo tarda la atención?</h3>
+                        <p>El soporte responde en minutos. Nuestro objetivo es darte ayuda inmediata y resolver tu compra lo antes posible, incluso fuera de horario habitual.</p>
+                    </div>
+                    <div class="info-card" style="text-align:center; padding: 24px;">
+                        <div style="font-size:62px; color:#0088cc; margin-bottom: 12px;"><i class="fa-brands fa-telegram"></i></div>
+                        <a href="https://t.me/RealStrategy" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; justify-content:center; text-decoration:none; background:#24b362; color:#0b0a0a; padding:10px 22px; border-radius:999px; box-shadow:0 14px 30px rgba(36,179,98,0.24); font-weight:900; font-size:20px;">
+                            Contactar
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1127,7 +1270,7 @@
                 <!-- STEP 1: seleccion / cantidad / features (no editar) -->
                 <div id="step1">
                     <div id="modal-product-details">
-                        <h3 id="modal-product-name" style="font-size: 18px;">Producto</h3>
+                        <h3 id="modal-product-name" style="font-size: 18px;">Servicio</h3>
                         <p id="modal-product-price" style="color: var(--accent-color); font-weight: 800; font-size: 22px; margin-top: 5px;">$0.00</p>
                     </div>
 
@@ -1155,7 +1298,7 @@
 
                     <div style="display:flex; gap:10px; align-items:center;">
                         <button class="main-action-btn" id="buyNowBtn" onclick="proceedToPayment()">
-                            <i class="fa-solid fa-cart-plus"></i> Buy Now · <span id="buyNowPrice">$0.00</span>
+                            <i class="fa-solid fa-cart-plus"></i> Pagar ahora · <span id="buyNowPrice">$0.00</span>
                         </button>
                     </div>
                 </div>
@@ -1186,11 +1329,11 @@
                         </div>
                     </div>
 
-                    <!-- Resumen del producto dentro del paso de pago -->
+                    <!-- Resumen del servicio dentro del paso de pago -->
                     <div class="info-card" id="paymentProductSummary" style="display:none; margin-top:12px;">
                         <h3 style="font-size:14px; margin-bottom:8px;">Resumen del pedido</h3>
                         <p style="font-size:13px; color:var(--text-sub);">
-                            Producto: <strong id="payProdName">-</strong><br>
+                            Servicio: <strong id="payProdName">-</strong><br>
                             Cantidad: <strong id="payProdQty">1</strong><br>
                             Precio total: <strong id="payProdTotal">$0.00</strong>
                         </p>
@@ -1204,9 +1347,9 @@
                         <p>Envía tu pedido por WhatsApp o Telegram. Incluye las pruebas de pago y tu comprobante (toma captura de este apartado con los datos).</p>
                     </div>
                     <div class="info-card" style="margin-bottom: 12px;">
-                        <h3 style="font-size: 14px;">Datos del producto</h3>
+                        <h3 style="font-size: 14px;">Datos del servicio</h3>
                         <p style="font-size: 13px; color: var(--text-sub); margin-top: 8px; line-height: 1.5;">
-                            Producto: <strong id="confirmProductName">-</strong><br>
+                            Servicio: <strong id="confirmProductName">-</strong><br>
                             Cantidad: <strong class="confirm-qty" id="confirmProductQty">1</strong><br>
                             Precio total: <strong class="confirm-total" id="confirmTotal">$0.00</strong><br>
                             Método de pago: <strong id="confirmPaymentMethod">-</strong>
@@ -1225,21 +1368,31 @@
         <!-- Footer Inferior (Funcional) -->
         <nav class="bottom-nav">
             <div class="nav-item active" onclick="switchTab('home', this)"><i class="fa-solid fa-house"></i>Inicio</div>
-            <div class="nav-item" onclick="switchTab('products', this)"><i class="fa-solid fa-bag-shopping"></i>Tienda</div>
+            <div class="nav-item" onclick="switchTab('store', this)"><i class="fa-solid fa-bag-shopping"></i>Tienda</div>
+            <div class="nav-item" onclick="switchTab('products', this)"><i class="fa-solid fa-gift"></i>Premios</div>
             <div class="nav-item" onclick="switchTab('contact', this)"><i class="fa-solid fa-headset"></i>Soporte</div>
         </nav>
     </div>
 
     <script>
-        // --- BASE DE DATOS LOCAL (Productos editables) ---
-        const FEATURED_PRODUCT_ID = 4; // Cambia este ID para destacar otro producto en el banner
-        const DEFAULT_PRODUCTS = [
+        // --- BASE DE DATOS LOCAL (Servicios editables) ---
+        const FEATURED_BANNER = {
+            serviceId: 10, // Cambia este ID para destacar otro servicio en el banner
+            label: "TOP VENTAS", // Cambia el texto de etiqueta del banner
+            buttonTextPrefix: "Pedir ahora - ", // Cambia el texto del botón si quieres otro CTA
+            rotateIds: [16, 0, 7, 20], // IDs de servicios que rotarán en el banner
+            rotateIntervalMs: 2500 // Tiempo en milisegundos para cambiar al siguiente servicio
+        };
+
+        const TOP_SERVICE_IDS = [4, 0, 6, 16, 12, 7, 3, 20]; // Cambia aquí los 8 IDs que quieres mostrar en Inicio
+
+        const DEFAULT_SERVICES = [
             { id: 0, category: "VPN · SUBSCRIPTION", name: "NordVPN 1 Año", description: "VPN Premium, 10 dispositivos.", price: 25.00, stock: 10, image: "img/nordvpn.webp", features: "Cuenta premium con conexión en 10 dispositivos, soporte P2P y killswitch." },
             { id: 1, category: "MAIL", name: "Cuentas GMAIL", description: "Cuentas de correo electrónico.", price: 2.00, stock: 27, image: "img/gmail.webp", features: "Cuentas de correo electrónico con acceso a todas las funciones de Gmail." },
             { id: 2, category: "IA", name: "Gemini AI Pro", description: "Gemini AI Pro 1 Year Acc", price: 3.00, stock: 3, image: "img/gemini.webp", features: "Acceso anual a Gemini Pro. Revisa disponibilidad antes de comprar." },
             { id: 3, category: "STREAMING", name: "HBO Max", description: "Cuenta premium activa y lista para usar.", price: 5.00, stock: 4, image: "img/hbomax.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo." },
             { id: 4, category: "STREAMING", name: "Spotify Premium", description: "Cuenta premium activa y lista para usar.", price: 5.00, stock: 8, image: "img/spotify.webp", features: "Incluye acceso premium con reproducción sin anuncios y modo offline." },
-            { id: 5, category: "WINDOWS", name: "Windows 11 Pro", description: "Licencia digital para activación segura.", price: 12.00, stock: 0, image: "img/windows11.webp", features: "Clave válida para instalación en PC compatible, actualizaciones y soporte básico." },
+            { id: 5, category: "LICENCIAS", name: "Windows 11 Pro", description: "Licencia digital para activación segura.", price: 12.00, stock: 0, image: "img/windows11.webp", features: "Clave válida para instalación en PC compatible, actualizaciones y soporte básico." },
             { id: 6, category: "DESIGN", name: "Canva Pro", description: "Acceso a plantillas premium y herramientas avanzadas de diseño.", price: 3.00, stock: 28, image: "img/canva.webp", features: "Acceso a plantillas premium, elementos destacados y herramientas avanzadas de diseño." },
             { id: 7, category: "ENTRETENIMIENTO", name: "Paramount +", description: "Acceso a contenido premium y aplicaciones creativas.", price: 4.00, stock: 22, image: "img/paramount.webp", features: "Incluye acceso a aplicaciones creativas con uso profesional y opciones de colaboración." },
             { id: 8, category: "STORAGE", name: "Dropbox Pro", description: "Almacenamiento premium y sincronización.", price: 8.00, stock: 7, image: "img/dropbox.webp", features: "Espacio ampliado y sincronización en múltiples dispositivos con seguridad extra." },
@@ -1253,9 +1406,10 @@
             { id: 16, category: "VPN", name: "Surfshark VPN", description: "VPN Premium, por activacion.", price: 3.00, stock: 26, image: "img/surfshark.webp", features: "Cuenta premium con conexión en múltiples dispositivos, soporte P2P y killswitch." },
             { id: 17, category: "STREAMING", name: "Tidal Premium", description: "Música de alta calidad con acceso a contenido exclusivo.", price: 3.00, stock: 13, image: "img/tidal.webp", features: "Acceso a música de alta calidad con reproducción sin anuncios y contenido exclusivo." },
             { id: 18, category: "VIP", name: "Grupo VIP", description: "Acceso exclusivo a contenido premium.", price: 50.00, stock: 5, image: "img/vip.webp", features: "Acceso exclusivo a contenido premium y beneficios especiales." },
-            { id: 19, category: "VPN", name: "Hma PRO VPN", description: "VPN Premium, por licencia.", price: 4.00, stock: 15, image: "img/hmapro.webp", features: "Licencia válida para instalación en dispositivos compatibles, valido por 30 dias." }
+            { id: 19, category: "VPN", name: "Hma PRO VPN", description: "VPN Premium, por licencia.", price: 4.00, stock: 15, image: "img/hmapro.webp", features: "Licencia válida para instalación en dispositivos compatibles, valido por 30 dias." },
+            { id: 20, category: "LICENCIAS", name: "Eset NOD 32", description: "Licencia digital para activación segura.", price: 2.00, stock: 123, image: "img/eset.webp", features: "Clave válida para instalación en PC compatible, actualizaciones y soporte básico." }
         ];
-        let products = [...DEFAULT_PRODUCTS];
+        let services = [...DEFAULT_SERVICES];
 
         // --- CONFIGURACIÓN DE CONTACTO (Editar aquí) ---
         const CONTACT_WHATSAPP = "51955345060";
@@ -1269,56 +1423,55 @@
             'cash': { icon: 'fa-solid fa-money-bill-wave', text: 'Pago efectivo: recojo o entrega' }
         };
 
-        let currentProductId = null;
+        let currentServiceId = null;
         let selectedPaymentMethod = null;
         let quantity = 1;
 
         // --- PERSISTENCIA EN localStorage ---
-        const STORAGE_KEY = 'realstore_products_v1';
+        const STORAGE_KEY = 'realstore_services_v1';
 
-        function saveProductsToStorage() {
+        function saveServicesToStorage() {
             try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(services));
             } catch (e) {
                 console.warn('No se pudo guardar en localStorage', e);
             }
         }
 
-        function loadProductsFromStorage() {
+        function loadServicesFromStorage() {
             try {
                 const raw = localStorage.getItem(STORAGE_KEY);
                 if (raw) {
                     const parsed = JSON.parse(raw);
                     if (Array.isArray(parsed)) {
-                        const mergedProducts = DEFAULT_PRODUCTS.map(defaultProduct => {
-                            const savedProduct = parsed.find(item => item.id === defaultProduct.id);
-                            return savedProduct ? { ...defaultProduct, ...savedProduct } : { ...defaultProduct };
+                        const mergedServices = DEFAULT_SERVICES.map(defaultService => {
+                            const savedService = parsed.find(item => item.id === defaultService.id);
+                            return savedService ? { ...defaultService, ...savedService } : { ...defaultService };
                         });
 
-                        const extraProducts = parsed.filter(savedProduct =>
-                            !mergedProducts.some(item => item.id === savedProduct.id)
+                        const extraServices = parsed.filter(savedService =>
+                            !mergedServices.some(item => item.id === savedService.id)
                         );
 
-                        products = [...mergedProducts, ...extraProducts];
-                        saveProductsToStorage();
+                        services = [...mergedServices, ...extraServices];
+                        saveServicesToStorage();
                         return;
                     }
                 }
-                products = [...DEFAULT_PRODUCTS];
+                services = [...DEFAULT_SERVICES];
             } catch (e) {
                 console.warn('No se pudo leer localStorage', e);
-                products = [...DEFAULT_PRODUCTS];
+                services = [...DEFAULT_SERVICES];
             }
         }
 
-        // --- RENDERIZADO DE PRODUCTOS ---
-        function renderProducts() {
-            const grid = document.getElementById('product-grid');
+        // --- RENDERIZADO DE SERVICIOS ---
+        function renderServices(filteredServices) {
             const gridFull = document.getElementById('product-grid-full');
+            const list = Array.isArray(filteredServices) ? filteredServices : services;
             let htmlAll = '';
-            let htmlHome = '';
 
-            products.forEach((p, index) => {
+            list.forEach((p, index) => {
                 let stockClass = 'p-stock in';
                 let stockText = `${p.stock} Quedan`;
                 let disabledClass = '';
@@ -1332,12 +1485,12 @@
                 }
 
                 const productHtml = `
-                    <div class="product-card ${disabledClass}" onclick="handleProductClick(${index})">
+                    <div class="product-card ${disabledClass}" onclick="handleServiceClick(${index})">
                         <div class="product-image">
                             <img src="${p.image}" class="product-img" alt="${p.name}">
                         </div>
                         <div class="product-info">
-                            <div class="p-category">${p.category || 'Producto'}</div>
+                            <div class="p-category">${p.category || 'Servicio'}</div>
                             <div class="p-title">${p.name}</div>
                             <div class="p-desc">${p.description}</div>
                             <div class="p-footer">
@@ -1349,36 +1502,103 @@
                 `; 
 
                 htmlAll += productHtml;
-                if (index < 8) {
-                    htmlHome += productHtml;
-                }
             });
 
-            grid.innerHTML = htmlHome;
-            gridFull.innerHTML = htmlAll;
-        }
-
-        function updateFeaturedBanner() {
-            const product = products.find(p => p.id === FEATURED_PRODUCT_ID) || products[0];
-            if (!product) return;
-            const bannerTitle = document.getElementById('bannerTitle');
-            const bannerBuyBtn = document.getElementById('bannerBuyBtn');
-            const bannerImage = document.querySelector('#bannerImage img');
-
-            bannerTitle.innerText = product.name;
-            bannerBuyBtn.innerText = `Buy now - $${product.price.toFixed(2)}`;
-            bannerBuyBtn.setAttribute('onclick', `openModal(${products.indexOf(product)})`);
-
-            if (bannerImage) {
-                bannerImage.src = product.image;
-                bannerImage.alt = product.name;
+            if (!htmlAll) {
+                gridFull.innerHTML = '<div class="empty-search">No se encontraron servicios.</div>';
+            } else {
+                gridFull.innerHTML = htmlAll;
             }
         }
 
-        // --- ACCIONES DE CLICK EN PRODUCTO ---
-        function handleProductClick(index) {
-            const product = products[index];
-            if (product.stock <= 0) {
+        function renderHomeServices() {
+            const grid = document.getElementById('product-grid');
+            const selectedServices = TOP_SERVICE_IDS
+                .map(id => services.find(p => p.id === id))
+                .filter(Boolean);
+
+            const htmlHome = selectedServices.map((p, index) => {
+                const stockClass = p.stock <= 0 ? 'p-stock out' : p.stock <= 3 ? 'p-stock low' : 'p-stock in';
+                const stockText = p.stock <= 0 ? 'Sin Stock' : `${p.stock} Quedan`;
+                const disabledClass = p.stock <= 0 ? 'disabled' : '';
+
+                return `
+                    <div class="product-card ${disabledClass}" onclick="handleServiceClick(${services.indexOf(p)})">
+                        <div class="product-image">
+                            <img src="${p.image}" class="product-img" alt="${p.name}">
+                        </div>
+                        <div class="product-info">
+                            <div class="p-category">${p.category || 'Servicio'}</div>
+                            <div class="p-title">${p.name}</div>
+                            <div class="p-desc">${p.description}</div>
+                            <div class="p-footer">
+                                <span class="p-price">$${p.price.toFixed(2)}</span>
+                                <span class="${stockClass}">${stockText}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            grid.innerHTML = htmlHome;
+        }
+
+        function updateFeaturedBanner(serviceId) {
+            const service = services.find(p => p.id === serviceId) || services[0];
+            if (!service) return;
+
+            const banner = document.getElementById('mainBanner');
+            const bannerLabel = document.getElementById('bannerLabel');
+            const bannerTitle = document.getElementById('bannerTitle');
+            const bannerDescription = document.getElementById('bannerDescription');
+            const bannerBuyBtn = document.getElementById('bannerBuyBtn');
+
+            banner.classList.add('banner-fade');
+            setTimeout(() => {
+                bannerLabel.innerText = FEATURED_BANNER.label;
+                bannerTitle.innerText = service.name;
+                bannerDescription.innerText = service.description;
+                bannerBuyBtn.innerText = `${FEATURED_BANNER.buttonTextPrefix}$${service.price.toFixed(2)}`;
+                bannerBuyBtn.setAttribute('onclick', `openModal(${services.indexOf(service)})`);
+                banner.style.backgroundImage = `radial-gradient(circle at top left, rgba(0,0,0,0.35), transparent 28%), radial-gradient(circle at bottom right, rgba(0,0,0,0.35), transparent 28%), url("${service.image}")`;
+                banner.classList.remove('banner-fade');
+            }, 150);
+        }
+
+        function startBannerRotation() {
+            let currentIndex = 0;
+            const ids = FEATURED_BANNER.rotateIds.filter(id => services.some(p => p.id === id));
+            if (!ids.length) return;
+
+            updateFeaturedBanner(ids[currentIndex]);
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % ids.length;
+                updateFeaturedBanner(ids[currentIndex]);
+            }, FEATURED_BANNER.rotateIntervalMs);
+        }
+
+        // --- ACCIONES DE CLICK EN SERVICIO ---
+        function performSearch(query) {
+            const normalized = (query || '').trim().toLowerCase();
+            switchTab('store', null);
+            if (!normalized) {
+                renderServices();
+                return;
+            }
+
+            const filtered = services.filter(p => {
+                return p.name.toLowerCase().includes(normalized) ||
+                    (p.category || '').toLowerCase().includes(normalized) ||
+                    (p.description || '').toLowerCase().includes(normalized) ||
+                    (p.features || '').toLowerCase().includes(normalized);
+            });
+
+            renderServices(filtered);
+        }
+
+        function handleServiceClick(index) {
+            const service = services[index];
+            if (service.stock <= 0) {
                 const card = event.target.closest('.product-card');
                 card.style.animation = 'none';
                 setTimeout(() => { card.style.animation = ''; }, 10);
@@ -1388,7 +1608,7 @@
             openModal(index);
         }
 
-        // Animación de shake para productos sin stock
+        // Animación de shake para servicios sin stock
         const style = document.createElement('style');
         style.textContent = `
             @keyframes shake {
@@ -1401,9 +1621,9 @@
 
         // --- SELECTOR DE CANTIDAD ---
         function increaseQuantity() {
-            const product = products[currentProductId];
-            if (!product) return;
-            if (quantity < product.stock) {
+            const service = services[currentServiceId];
+            if (!service) return;
+            if (quantity < service.stock) {
                 quantity++;
                 updateQuantityDisplay();
             }
@@ -1417,9 +1637,9 @@
         }
 
         function updateQuantityDisplay() {
-            const product = products[currentProductId];
-            if (!product) return;
-            const total = product.price * quantity;
+            const service = services[currentServiceId];
+            if (!service) return;
+            const total = service.price * quantity;
             document.getElementById('quantityValue').innerText = quantity;
             // update buy now price
             const buyPriceEl = document.getElementById('buyNowPrice');
@@ -1446,8 +1666,8 @@
             if (buyNowBtn) {
                 if (n === 1) {
                     buyNowBtn.style.display = 'block';
-                    // re-enable based on current product stock
-                    const prod = products[currentProductId];
+                    // re-enable based on current service stock
+                    const prod = services[currentServiceId];
                     buyNowBtn.disabled = prod ? (prod.stock <= 0) : false;
                 } else {
                     buyNowBtn.style.display = 'none';
@@ -1458,24 +1678,24 @@
         function markPaid() {
             // when user indicates they already paid, move to final confirmation step
             // populate confirmation fields from current order
-            document.getElementById('confirmProductName').innerText = products[currentProductId].name;
+            document.getElementById('confirmProductName').innerText = services[currentServiceId].name;
             document.getElementById('confirmProductQty').innerText = quantity;
-            document.getElementById('confirmTotal').innerText = `$${(products[currentProductId].price * quantity).toFixed(2)}`;
+            document.getElementById('confirmTotal').innerText = `$${(services[currentServiceId].price * quantity).toFixed(2)}`;
             document.getElementById('confirmPaymentMethod').innerText = PAYMENT_DETAILS[selectedPaymentMethod] ? PAYMENT_DETAILS[selectedPaymentMethod].text : '-';
             window.orderData = window.orderData || {};
-            window.orderData.product = products[currentProductId].name;
+            window.orderData.service = services[currentServiceId].name;
             window.orderData.quantity = quantity;
-            window.orderData.total = (products[currentProductId].price * quantity).toFixed(2);
+            window.orderData.total = (services[currentServiceId].price * quantity).toFixed(2);
             window.orderData.method = PAYMENT_DETAILS[selectedPaymentMethod] ? PAYMENT_DETAILS[selectedPaymentMethod].text : '';
-            window.orderData.message = `✅ *Nueva Orden - REAL Store*\n━━━━━━━━━━━━━━━━━━━━━\n🛒 Producto: ${window.orderData.product}\n📦 Cantidad: ${window.orderData.quantity}\n💵 Total: $${window.orderData.total}\n💳 Método Pago: ${window.orderData.method}\n━━━━━━━━━━━━━━━━━━━━━\n*Incluye las pruebas de pago y tu comprobante.*`;
+            window.orderData.message = `✅ *Nueva Orden - REAL Store*\n━━━━━━━━━━━━━━━━━━━━━\n🛒 Servicio: ${window.orderData.service}\n📦 Cantidad: ${window.orderData.quantity}\n💵 Total: $${window.orderData.total}\n💳 Método Pago: ${window.orderData.method}\n━━━━━━━━━━━━━━━━━━━━━\n*Incluye las pruebas de pago y tu comprobante.*`;
             showStep(3);
         }
 
         // --- MODAL Y PROCESO DE PAGO ---
         function openModal(index) {
             if (index === undefined) return;
-            currentProductId = index;
-            const product = products[index];
+            currentServiceId = index;
+            const product = services[index];
             quantity = product.stock > 0 ? 1 : 0;
 
             document.getElementById('modal-title').innerText = "Confirmar Compra";
@@ -1551,16 +1771,16 @@
                 qrPlaceholder.innerHTML = '<i class="fa-solid fa-qrcode"></i><span>Escanea el QR o usa los datos de pago para completar tu transacción.</span>';
             }
 
-            // show product summary in payment step and reveal YA PAGUÉ button
-            document.getElementById('payProdName').innerText = products[currentProductId].name;
+            // show service summary in payment step and reveal YA PAGUÉ button
+            document.getElementById('payProdName').innerText = services[currentServiceId].name;
             document.getElementById('payProdQty').innerText = quantity;
-            document.getElementById('payProdTotal').innerText = `$${(products[currentProductId].price * quantity).toFixed(2)}`;
+            document.getElementById('payProdTotal').innerText = `$${(services[currentServiceId].price * quantity).toFixed(2)}`;
             document.getElementById('paymentProductSummary').style.display = 'block';
 
             window.orderData = window.orderData || {};
-            window.orderData.product = products[currentProductId].name;
+            window.orderData.service = services[currentServiceId].name;
             window.orderData.quantity = quantity;
-            window.orderData.total = (products[currentProductId].price * quantity).toFixed(2);
+            window.orderData.total = (services[currentServiceId].price * quantity).toFixed(2);
             window.orderData.method = PAYMENT_DETAILS[method].text;
         }
 
@@ -1574,17 +1794,17 @@
                 window.open(`https://t.me/${CONTACT_TELEGRAM}?text=${encodedMessage}`, '_blank');
             }
 
-            if (products[currentProductId]) {
-                products[currentProductId].stock = Math.max(0, (products[currentProductId].stock || 0) - quantity);
-                saveProductsToStorage();
+            if (services[currentServiceId]) {
+                services[currentServiceId].stock = Math.max(0, (services[currentServiceId].stock || 0) - quantity);
+                saveServicesToStorage();
             }
-            renderProducts();
+            renderServices();
             closeModal();
         }
 
         // --- CAMBIAR TABS ---
         function switchTab(tabId, element) {
-            const tabs = ['home', 'products', 'contact', 'faq'];
+            const tabs = ['home', 'products', 'store', 'contact', 'faq'];
             
             if (!tabs.includes(tabId)) return;
 
@@ -1599,10 +1819,12 @@
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             if (tabId === 'home') {
                 document.querySelectorAll('.nav-item')[0].classList.add('active');
-            } else if (tabId === 'products') {
+            } else if (tabId === 'store') {
                 document.querySelectorAll('.nav-item')[1].classList.add('active');
-            } else if (tabId === 'contact') {
+            } else if (tabId === 'products') {
                 document.querySelectorAll('.nav-item')[2].classList.add('active');
+            } else if (tabId === 'contact') {
+                document.querySelectorAll('.nav-item')[3].classList.add('active');
             }
 
             document.querySelectorAll('.section-content').forEach(el => el.classList.remove('active'));
@@ -1614,10 +1836,11 @@
             document.querySelector('.main-scroll').scrollTop = 0;
         }
 
-        // Inicializar: cargar productos persistidos y renderizar
-        loadProductsFromStorage();
-        renderProducts();
-        updateFeaturedBanner();
+        // Inicializar: cargar servicios persistidos y renderizar
+        loadServicesFromStorage();
+        renderServices();
+        renderHomeServices();
+        startBannerRotation();
         
         // Cerrar modal haciendo clic fuera
         document.getElementById('purchaseModal').addEventListener('click', function(e) {
