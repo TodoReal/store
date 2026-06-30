@@ -74,6 +74,7 @@
             box-sizing: border-box;
             padding-left: 8px;
             padding-right: 8px;
+            padding-bottom: calc(70px + env(safe-area-inset-bottom, 0));
             backdrop-filter: blur(10px);
         }
 
@@ -139,10 +140,6 @@
         }
 
         .search-box input::placeholder {
-            color: rgba(255,255,255,0.72);
-        }
-
-        .search-box input::placeholder {
             color: rgba(255,255,255,0.65);
         }
 
@@ -197,77 +194,8 @@
             letter-spacing: 0.4px;
         }
         
-        .top-actions { 
-            display: flex; 
-            gap: 8px; 
-        }
-        
-        .top-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-sub);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-        
-        .top-btn:hover {
-            background: rgba(255,255,255,0.10);
-            transform: translateY(-1px);
-        }
-
-        .top-btn:active { 
-            transform: scale(0.95); 
-            background: rgba(255,255,255,0.08);
-        }
-
-
-        .tab-menu {
-            display: none;
-        }
-
-        .tab-menu::-webkit-scrollbar { 
-            display: none; 
-        }
-
-        .tab-btn {
-            background: rgba(255,255,255,0.03);
-            color: var(--text-main);
-            border: 1px solid rgba(255,255,255,0.08);
-            padding: 10px 18px;
-            border-radius: 999px;
-            font-weight: 700;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            flex-shrink: 0;
-        }
-        
-        .tab-btn:focus-visible {
-            outline: none;
-            box-shadow: none;
-        }
-
-        .tab-btn.active { 
-            background: rgba(245,214,179,0.18);
-            color: var(--accent-color); 
-            border-color: rgba(245,214,179,0.35);
-        }
-        
-        .tab-btn:hover:not(.active) {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-        
-        .tab-btn:active:not(.active) { 
-            opacity: 0.7;
+        .shake {
+            animation: shake 0.4s ease-in-out;
         }
 
         .main-scroll { 
@@ -759,6 +687,18 @@
         .pay-btn:active { 
             transform: scale(0.95); 
         }
+
+        .pay-btn.disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            border-color: rgba(255,255,255,0.10);
+            background: rgba(255,255,255,0.03);
+            color: rgba(255,255,255,0.65);
+        }
+        
+        .pay-btn.disabled:hover {
+            transform: none;
+        }
         
         .pay-btn.active { 
             border-color: var(--accent-color); 
@@ -830,6 +770,17 @@
             color: var(--accent-color);
         }
 
+        .payment-qr-image {
+            width: min(220px, 100%);
+            max-width: 220px;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+            margin: 0 auto 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
         .main-action-btn {
             background: var(--accent-color);
             color: var(--accent-text);
@@ -885,55 +836,141 @@
             color: var(--text-sub);
         }
 
-        /* Selector de Cantidad */
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
+        /* Selector de Plan (Meses) */
+        .plan-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
             margin: 15px 0;
         }
 
-        .quantity-btn {
+        .plan-option {
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            color: var(--text-main);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            border: 2px solid var(--card-border);
+            color: var(--text-sub);
+            padding: 12px 8px;
+            border-radius: 12px;
             cursor: pointer;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            font-weight: 700;
+            gap: 4px;
+            font-weight: 600;
             transition: all 0.2s ease;
             user-select: none;
         }
 
-        .quantity-btn:active {
-            transform: scale(0.9);
+        .plan-option:active {
+            transform: scale(0.95);
+        }
+
+        .plan-option.active {
+            background: var(--accent-color);
+            color: var(--accent-text);
+            border-color: var(--accent-color);
+        }
+
+        .plan-option .plan-months {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .plan-option .plan-price {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .quantity-selector {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .quantity-selector button {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 26px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .quantity-selector button:active {
+            transform: scale(0.95);
         }
 
         .quantity-display {
             flex: 1;
+            min-width: 80px;
+            padding: 12px 0;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             text-align: center;
+        }
+
+        .quantity-display p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        .quantity-display span {
+            display: block;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .plan-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
             padding: 12px;
             background: var(--card-bg);
             border-radius: 12px;
             border: 1px solid var(--card-border);
         }
 
-        .quantity-display p {
+        .plan-info-label {
             font-size: 12px;
             color: var(--text-sub);
-            margin-bottom: 4px;
         }
 
-        .quantity-display span {
-            font-size: 24px;
-            font-weight: 800;
+        .plan-info-value {
+            font-size: 14px;
+            font-weight: 700;
             color: var(--text-main);
+        }
+
+        .plan-stock {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+        }
+
+        .plan-stock-icon {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green-stock);
+        }
+
+        .plan-stock.low .plan-stock-icon {
+            background: var(--orange-stock);
+        }
+
+        .plan-stock.out .plan-stock-icon {
+            background: var(--red-stock);
         }
 
         /* Factura */
@@ -989,7 +1026,7 @@
         }
         
         .bottom-nav {
-            position: absolute;
+            position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
@@ -998,10 +1035,11 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 10px 0;
-            z-index: 99;
+            padding: calc(10px + env(safe-area-inset-bottom, 0)) 0 10px;
+            z-index: 999;
             flex-shrink: 0;
             backdrop-filter: blur(10px);
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.25);
         }
         
         .nav-item {
@@ -1058,7 +1096,7 @@
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .app-container { max-width: 100%; height: 100vh; margin: 0; border-radius: 0; border: none; box-shadow: none; padding: 0; }
+            .app-container { max-width: 100%; height: 100vh; margin: 0; border-radius: 0; border: none; box-shadow: none; padding: 0; padding-bottom: calc(70px + env(safe-area-inset-bottom, 0)); }
             .banner { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text image"; align-items: center; padding: 18px 16px; min-height: 170px; margin-bottom: 18px; }
             .banner-content { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text image"; align-items: center; gap: 14px; width: 100%; text-align: left; }
             .banner-text { align-items: flex-start; text-align: left; grid-area: text; }
@@ -1091,6 +1129,7 @@
             .p-title { font-size: 13px; min-height: 28px; }
             .p-desc { font-size: 11px; margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
             .p-price { font-size: 14px; }
+            .p-stock { font-size: 8px; padding: 2px 4px; }
             .container { padding: 10px 8px 30px; }
             .banner-content { padding: 16px; gap: 16px; }
             .banner { min-height: 170px; margin-bottom: 16px; }
@@ -1099,9 +1138,7 @@
             .banner p { font-size: 13px; }
             .buy-banner-btn { padding: 10px 16px; font-size: 12px; }
             .banner-label { font-size: 9px; }
-            .logo { font-size: 18px; gap: 8px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-            .logo i { font-size: 18px; }
-            .logo span { font-size: 14px; }
+            .section-title { font-size: 19px; margin-bottom: 16px; }
             .top-nav { padding: 8px 10px; gap: 10px; flex-wrap: nowrap; justify-content: space-between; align-items: center; }
             .search-box { flex: 0 0 auto; min-width: 0; width: min(220px, 50vw); max-width: 220px; margin-top: 0; }
             .search-box input { width: 100%; min-width: 0; }
@@ -1197,7 +1234,7 @@
                                 <div class="banner-label" id="bannerLabel">TOP VENTAS</div>
                                 <h2 id="bannerTitle">Spotify Premium</h2>
                                 <p id="bannerDescription">Cuenta premium activa y lista para usar.</p>
-                                <button class="buy-banner-btn" id="bannerBuyBtn" onclick="openModal(4)">Pedir ahora - $7.00</button>
+                                <button class="buy-banner-btn" id="bannerBuyBtn" onclick="openModal(10)">Pedir ahora</button>
                             </div>
                         </div>
                     </div>
@@ -1255,6 +1292,7 @@
                             Contactar
                         </a>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -1281,19 +1319,47 @@
                         </div>
                     </div>
 
-                    <!-- Selector de Cantidad -->
-                    <div class="quantity-selector">
-                        <button class="quantity-btn" onclick="decreaseQuantity()">−</button>
-                        <div class="quantity-display">
-                            <p>Cantidad</p>
-                            <span id="quantityValue">1</span>
+                    <!-- Selector de Plan o Cantidad -->
+                    <div style="margin-bottom: 15px;">
+                        <p id="planSelectorLabel" style="font-size: 13px; color: var(--text-sub); margin-bottom: 8px;">Elige tu plan:</p>
+                        <div class="plan-selector" id="planSelector">
+                            <div class="plan-option active" onclick="selectPlan(1, this)">
+                                <span class="plan-months">1</span>
+                                <span class="plan-price"><span id="price1m">$5</span></span>
+                                <span style="font-size: 10px;">mes</span>
+                            </div>
+                            <div class="plan-option" onclick="selectPlan(3, this)">
+                                <span class="plan-months">3</span>
+                                <span class="plan-price"><span id="price3m">$15</span></span>
+                                <span style="font-size: 10px;">meses</span>
+                            </div>
+                            <div class="plan-option" onclick="selectPlan(6, this)">
+                                <span class="plan-months">6</span>
+                                <span class="plan-price"><span id="price6m">$30</span></span>
+                                <span style="font-size: 10px;">meses</span>
+                            </div>
+                            <div class="plan-option" onclick="selectPlan(12, this)">
+                                <span class="plan-months">12</span>
+                                <span class="plan-price"><span id="price12m">$60</span></span>
+                                <span style="font-size: 10px;">meses</span>
+                            </div>
                         </div>
-                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                        <div class="quantity-selector" id="quantitySelector">
+                            <button type="button" onclick="decreaseQuantity()">−</button>
+                            <div class="quantity-display">
+                                <p>Cantidad</p>
+                                <span id="quantityValue">1</span>
+                            </div>
+                            <button type="button" onclick="increaseQuantity()">+</button>
+                        </div>
                     </div>
 
-                    <div id="modal-stock-info" style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom: 18px;">
-                        <span class="p-stock in" id="modalStockLabel">En stock</span>
-                        <span style="color: var(--text-sub); font-size: 13px;" id="modalStockText">Disponible</span>
+                    <div class="plan-info">
+                        <div class="plan-info-label">Stock disponible:</div>
+                        <div class="plan-stock in" id="modalStockInfo">
+                            <span class="plan-stock-icon"></span>
+                            <span id="modalStockText">Disponible</span>
+                        </div>
                     </div>
 
                     <div style="display:flex; gap:10px; align-items:center;">
@@ -1306,16 +1372,16 @@
                 <div id="paymentSection" style="display: none;">
                     <p style="color: var(--text-sub); font-size: 13px; margin: 20px 0 10px;">Elige cómo quieres pagar:</p>
                     <div class="pay-methods">
-                        <div class="pay-btn" onclick="selectPayment('binance', this)">
+                        <div class="pay-btn" data-pay-method="binance" onclick="selectPayment('binance', this)">
                             <i class="fa-brands fa-bitcoin"></i> Binance
                         </div>
-                        <div class="pay-btn" onclick="selectPayment('yape', this)">
+                        <div class="pay-btn" data-pay-method="yape" onclick="selectPayment('yape', this)">
                             <i class="fa-solid fa-mobile-screen-button"></i> Yape
                         </div>
-                        <div class="pay-btn" onclick="selectPayment('paypal', this)">
+                        <div class="pay-btn" data-pay-method="paypal" onclick="selectPayment('paypal', this)">
                             <i class="fa-brands fa-paypal"></i> PayPal
                         </div>
-                        <div class="pay-btn" onclick="selectPayment('cash', this)">
+                        <div class="pay-btn" data-pay-method="cash" onclick="selectPayment('cash', this)">
                             <i class="fa-solid fa-money-bill-wave"></i> Efectivo
                         </div>
                     </div>
@@ -1387,45 +1453,96 @@
         const TOP_SERVICE_IDS = [4, 0, 6, 16, 12, 7, 3, 20]; // Cambia aquí los 8 IDs que quieres mostrar en Inicio
 
         const DEFAULT_SERVICES = [
-            { id: 0, category: "VPN · SUBSCRIPTION", name: "NordVPN 1 Año", description: "VPN Premium, 10 dispositivos.", price: 25.00, stock: 10, image: "img/nordvpn.webp", features: "Cuenta premium con conexión en 10 dispositivos, soporte P2P y killswitch." },
-            { id: 1, category: "MAIL", name: "Cuentas GMAIL", description: "Cuentas de correo electrónico.", price: 2.00, stock: 27, image: "img/gmail.webp", features: "Cuentas de correo electrónico con acceso a todas las funciones de Gmail." },
-            { id: 2, category: "IA", name: "Gemini AI Pro", description: "Gemini AI Pro 1 Year Acc", price: 3.00, stock: 3, image: "img/gemini.webp", features: "Acceso anual a Gemini Pro. Revisa disponibilidad antes de comprar." },
-            { id: 3, category: "STREAMING", name: "HBO Max", description: "Cuenta premium activa y lista para usar.", price: 5.00, stock: 4, image: "img/hbomax.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo." },
-            { id: 4, category: "STREAMING", name: "Spotify Premium", description: "Cuenta premium activa y lista para usar.", price: 5.00, stock: 8, image: "img/spotify.webp", features: "Incluye acceso premium con reproducción sin anuncios y modo offline." },
-            { id: 5, category: "LICENCIAS", name: "Windows 11 Pro", description: "Licencia digital para activación segura.", price: 12.00, stock: 0, image: "img/windows11.webp", features: "Clave válida para instalación en PC compatible, actualizaciones y soporte básico." },
-            { id: 6, category: "DESIGN", name: "Canva Pro", description: "Acceso a plantillas premium y herramientas avanzadas de diseño.", price: 3.00, stock: 28, image: "img/canva.webp", features: "Acceso a plantillas premium, elementos destacados y herramientas avanzadas de diseño." },
-            { id: 7, category: "ENTRETENIMIENTO", name: "Paramount +", description: "Acceso a contenido premium y aplicaciones creativas.", price: 4.00, stock: 22, image: "img/paramount.webp", features: "Incluye acceso a aplicaciones creativas con uso profesional y opciones de colaboración." },
-            { id: 8, category: "STORAGE", name: "Dropbox Pro", description: "Almacenamiento premium y sincronización.", price: 8.00, stock: 7, image: "img/dropbox.webp", features: "Espacio ampliado y sincronización en múltiples dispositivos con seguridad extra." },
-            { id: 9, category: "MAIL", name: "Outlook", description: "Cuentas de correo electrónico.", price: 2.00, stock: 18, image: "img/outlook.webp", features: "Cuentas de correo electrónico con acceso a todas las funciones de Outlook." },
-            { id: 10, category: "STREAMING", name: "Disney+ Premium", description: "Cuenta de streaming con varias pantallas.", price: 6.00, stock: 9, image: "img/disney.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo." },
-            { id: 11, category: "IA", name: "ChatGPT Plus", description: "Acceso mejorado con respuestas rápidas.", price: 10.00, stock: 4, image: "img/chatgpt.webp", features: "Mejor rendimiento, uso prioritario y funciones avanzadas para trabajo diario." },
-            { id: 12, category: "STREAMING", name: "Netflix Premium", description: "Cuenta premium activa y lista para usar.", price: 7.00, stock: 5, image: "img/netflix.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo." },
-            { id: 13, category: "STREAMING", name: "Amazon Prime Video", description: "Cuenta premium activa y lista para usar.", price: 6.00, stock: 6, image: "img/primevideo.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo." },
-            { id: 14, category: "STREAMING", name: "Hulu Premium", description: "Cuenta premium activa y lista para usar.", price: 5.00, stock: 3, image: "img/hulu.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo." },
-            { id: 15, category: "STREAMING", name: "YouTube Premium", description: "Cuenta premium activa y lista para usar.", price: 3.00, stock: 10, image: "img/youtube.webp", features: "Acceso a YouTube sin anuncios, reproducción en segundo plano y contenido exclusivo." },
-            { id: 16, category: "VPN", name: "Surfshark VPN", description: "VPN Premium, por activacion.", price: 3.00, stock: 26, image: "img/surfshark.webp", features: "Cuenta premium con conexión en múltiples dispositivos, soporte P2P y killswitch." },
-            { id: 17, category: "STREAMING", name: "Tidal Premium", description: "Música de alta calidad con acceso a contenido exclusivo.", price: 3.00, stock: 13, image: "img/tidal.webp", features: "Acceso a música de alta calidad con reproducción sin anuncios y contenido exclusivo." },
-            { id: 18, category: "VIP", name: "Grupo VIP", description: "Acceso exclusivo a contenido premium.", price: 50.00, stock: 5, image: "img/vip.webp", features: "Acceso exclusivo a contenido premium y beneficios especiales." },
-            { id: 19, category: "VPN", name: "Hma PRO VPN", description: "VPN Premium, por licencia.", price: 4.00, stock: 15, image: "img/hmapro.webp", features: "Licencia válida para instalación en dispositivos compatibles, valido por 30 dias." },
-            { id: 20, category: "LICENCIAS", name: "Eset NOD 32", description: "Licencia digital para activación segura.", price: 2.00, stock: 123, image: "img/eset.webp", features: "Clave válida para instalación en PC compatible, actualizaciones y soporte básico." }
+            { id: 0, category: "VPN", name: "Nord VPN", description: "VPN segura y de alta velocidad.", price: 5.00, stock: 10, image: "img/nordvpn.webp", features: "Cuenta premium con conexión en 10 dispositivos, soporte P2P y killswitch.", monthlyPrices: { 1: 5.00, 3: 15.00, 6: 25.00, 12: 45.00 } },
+            { id: 1, category: "MAIL", name: "Cuentas GMAIL", description: "Cuentas de correo electrónico.", price: 2.00, stock: 27, image: "img/gmail.webp", features: "Cuentas de correo electrónico con acceso a todas las funciones de Gmail.", monthlyPrices: { 1: 2.00, 3: 6.00, 6: 12.00, 12: 24.00 } },
+            { id: 2, category: "IA", name: "Gemini AI Pro", description: "Gemini AI Pro 1 Year Acc", price: 3.00, stock: 3, image: "img/gemini.webp", features: "Acceso anual a Gemini Pro. Revisa disponibilidad antes de comprar.", monthlyPrices: { 1: 3.00, 3: 9.00, 6: 18.00, 12: 36.00 } },
+            { id: 3, category: "STREAMING", name: "HBO Max", description: "Cuenta premium activa y lista para usar.", price: 5.00, stock: 4, image: "img/hbomax.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo.", monthlyPrices: { 1: 5.00, 3: 15.00, 6: 30.00, 12: 60.00 } },
+            { id: 4, category: "STREAMING", name: "Spotify Premium", description: "Cuenta premium activa y lista para usar.", price: 5.00, stock: 8, image: "img/spotify.webp", features: "Incluye acceso premium con reproducción sin anuncios y modo offline.", monthlyPrices: { 1: 5.00, 3: 15.00, 6: 30.00, 12: 50.00 } },
+            { id: 5, category: "MAIL", name: "Windows 11 Pro", description: "Licencia digital para activación segura.", price: 30.00, stock: 13, image: "img/windows11.webp", features: "Clave válida para instalación en PC compatible, actualizaciones y soporte básico.", monthlyPrices: { 1: 12.00, 3: 36.00, 6: 72.00, 12: 144.00 } },
+            { id: 6, category: "EDICION", name: "Canva Pro", description: "Acceso a plantillas premium y herramientas avanzadas de diseño.", price: 3.00, stock: 28, image: "img/canva.webp", features: "Acceso a plantillas premium, elementos destacados y herramientas avanzados de diseño.", monthlyPrices: { 1: 3.00, 3: 9.00, 6: 18.00, 12: 36.00 } },
+            { id: 7, category: "ENTRETENIMIENTO", name: "Paramount +", description: "Acceso a contenido premium y aplicaciones creativas.", price: 4.00, stock: 22, image: "img/paramount.webp", features: "Incluye acceso a aplicaciones creativas con uso profesional y opciones de colaboración.", monthlyPrices: { 1: 4.00, 3: 12.00, 6: 24.00, 12: 48.00 } },
+            { id: 8, category: "ALMACENAMIENTO", name: "Dropbox Pro", description: "Almacenamiento premium y sincronización.", price: 8.00, stock: 7, image: "img/dropbox.webp", features: "Espacio ampliado y sincronización en múltiples dispositivos con seguridad extra.", monthlyPrices: { 1: 8.00, 3: 24.00, 6: 48.00, 12: 96.00 } },
+            { id: 9, category: "MAIL", name: "Outlook", description: "Cuentas de correo electrónico.", price: 2.00, stock: 18, image: "img/outlook.webp", features: "Cuentas de correo electrónico con acceso a todas las funciones de Outlook.", monthlyPrices: { 1: 2.00, 3: 6.00, 6: 12.00, 12: 24.00 } },
+            { id: 10, category: "STREAMING", name: "Disney+ Premium", description: "Cuenta de streaming con varias pantallas.", price: 6.00, stock: 9, image: "img/disney.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo.", monthlyPrices: { 1: 6.00, 3: 18.00, 6: 36.00, 12: 72.00 } },
+            { id: 11, category: "MAIL", name: "ChatGPT Plus", description: "Acceso mejorado con respuestas rápidas.", price: 15.90, stock: 6, image: "img/chatgpt.webp", features: "Mejor rendimiento, uso prioritario y funciones avanzadas para trabajo diario. \nDuracion: 30 DIAS.", monthlyPrices: { 1: 15.90, 3: 47.70, 6: 95.40, 12: 190.80 } },
+            { id: 12, category: "STREAMING", name: "Netflix Premium", description: "Cuenta premium activa y lista para usar.", price: 14.90, stock: 5, image: "img/netflix.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo.", monthlyPrices: { 1: 14.90, 3: 44.70, 6: 89.40, 12: 178.80 } },
+            { id: 13, category: "STREAMING", name: "Amazon Prime Video", description: "Cuenta premium activa y lista para usar.", price: 5.00, stock: 6, image: "img/primevideo.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo.", monthlyPrices: { 1: 5.00, 3: 15.00, 6: 25.00, 12: 40.00 } },
+            { id: 14, category: "STREAMING", name: "Hulu Premium", description: "Cuenta premium activa y lista para usar.", price: 5.00, stock: 0, image: "img/hulu.webp", features: "Streaming HD con múltiples perfiles y contenido exclusivo.", monthlyPrices: { 1: 5.00, 3: 15.00, 6: 30.00, 12: 60.00 } },
+            { id: 15, category: "STREAMING", name: "YouTube Premium", description: "Cuenta premium activa y lista para usar.", price: 3.00, stock: 10, image: "img/youtube.webp", features: "Acceso a YouTube sin anuncios, reproducción en segundo plano y contenido exclusivo.", monthlyPrices: { 1: 3.00, 3: 9.00, 6: 18.00, 12: 36.00 } },
+            { id: 16, category: "VPN", name: "Surfshark VPN", description: "VPN Premium, por activacion.", price: 3.00, stock: 26, image: "img/surfshark.webp", features: "Cuenta premium con conexión en múltiples dispositivos, soporte P2P y killswitch.", monthlyPrices: { 1: 3.00, 3: 9.00, 6: 18.00, 12: 36.00 } },
+            { id: 17, category: "STREAMING", name: "Tidal Premium", description: "Música de alta calidad con acceso a contenido exclusivo.", price: 3.00, stock: 13, image: "img/tidal.webp", features: "Acceso a música de alta calidad con reproducción sin anuncios y contenido exclusivo.", monthlyPrices: { 1: 3.00, 3: 9.00, 6: 18.00, 12: 36.00 } },
+            { id: 18, category: "VIP", name: "Grupo VIP", description: "Acceso exclusivo a contenido premium.", price: 99.99, stock: 5, image: "img/vip.webp", features: "Acceso exclusivo a contenido premium y beneficios especiales.", monthlyPrices: { 1: 99.99, 3: 99.99, 6: 99.99, 12: 99.99 } },
+            { id: 19, category: "VPN", name: "Hma PRO VPN", description: "VPN Premium, por licencia.", price: 4.00, stock: 15, image: "img/hmapro.webp", features: "Licencia válida para instalación en dispositivos compatibles, valido por 30 dias.", monthlyPrices: { 1: 4.00, 3: 12.00, 6: 24.00, 12: 48.00 } },
+            { id: 20, category: "LICENCIAS", name: "Eset NOD 32", description: "Licencia digital para activación segura.", price: 2.00, stock: 123, image: "img/eset.webp", features: "Clave válida para instalación en PC compatible, actualizaciones y soporte básico.", monthlyPrices: { 1: 2.00, 3: 6.00, 6: 12.00, 12: 25.00 } },
+            { id: 21, category: "IA", name: "Claude AI", description: "Acceso a Claude AI con funciones avanzadas.", price: 19.90, stock: 8, image: "img/claude.webp", features: "Acceso a Claude AI con funciones avanzadas y soporte prioritario.", monthlyPrices: { 1: 19.90, 3: 59.70, 6: 119.40, 12: 238.80 } },
+            { id: 22, category: "STREAMING", name: "CapCut PRO", description: "Acceso a CapCut PRO con funciones avanzadas.", price: 10.00, stock: 11, image: "img/capcut.webp", features: "Acceso a CapCut PRO con funciones avanzadas y soporte prioritario.", monthlyPrices: { 1: 10.00, 3: 20.00, 6: 35.00, 12: 65.00 } }
         ];
         let services = [...DEFAULT_SERVICES];
+
+        // --- CÓMO EDITAR LOS PRECIOS DE LOS PLANES ---
+        // Cada servicio tiene una propiedad 'monthlyPrices' con precios para 1, 3, 6 y 12 meses
+        // Ejemplo: monthlyPrices: { 1: 5, 3: 15, 6: 30, 12: 60 }
+        // Puedes cambiar estos precios para aplicar descuentos o promociones
+        // Ejemplo con descuento: monthlyPrices: { 1: 5, 3: 12, 6: 25, 12: 50 }
+        // Los precios por defecto están calculados como: precio_base × meses
+        // Pero puedes personalizarlos como prefieras en cada servicio
 
         // --- CONFIGURACIÓN DE CONTACTO (Editar aquí) ---
         const CONTACT_WHATSAPP = "51955345060";
         const CONTACT_TELEGRAM = "@RealStrategy";
 
-        // --- DATOS DE PAGO (Editar aquí) ---
-        const PAYMENT_DETAILS = {
-            'binance': { icon: 'fa-brands fa-binance', text: 'ID: 1023938554\n USDT (BEP20): No operativo' },
-            'yape': { icon: 'fa-solid fa-mobile-screen-button', text: 'Yape: No operativo' },
-            'paypal': { icon: 'fa-brands fa-paypal', text: 'PayPal: No operativo' },
-            'cash': { icon: 'fa-solid fa-money-bill-wave', text: 'Pago efectivo: recojo o entrega' }
+        // --- MÉTODOS DE PAGO POR DEFECTO (Editar aquí) ---
+        const PAYMENT_METHODS = {
+            'binance': { icon: 'fa-brands fa-binance', defaultText: 'ID: 1023938554\nUSDT (BEP20): 0xd18b1037c394194df28c486625d3d869b1b015ce' },
+            'yape': { icon: 'fa-solid fa-mobile-screen-button', defaultText: 'YAPE: No operativo' },
+            'paypal': { icon: 'fa-brands fa-paypal', defaultText: 'SALDO PAYPAL: www.paypal.com/paypalme/RealStrategy\n\nTARJETA: https://www.paypal.com/donate/?hosted_button_id=UAKT647K65NFE' },
+            'cash': { icon: 'fa-solid fa-money-bill-wave', defaultText: 'PAGO EFECTIVO: Contáctame por WhatsApp o Telegram para generar el código de PagoEfectivo.\n\nPRESIONAR YA PAGUE\nSOLO PERU' }
         };
 
+        // --- CONFIGURACIÓN DE MÉTODOS DE PAGO POR ID DE SERVICIO (Editar aquí) ---
+        // Puedes identificar cada servicio por su ID y por el nombre que aparece en la lista de servicios.
+        const PAYMENT_OPTIONS_BY_SERVICE_ID = {
+            0: { name: 'Nord VPN', binance: true, yape: false, paypal: true, cash: true },
+            1: { name: 'Cuentas GMAIL', binance: true, yape: false, paypal: false, cash: true },
+            2: { name: 'Gemini AI Pro', binance: true, yape: false, paypal: true, cash: true },
+            3: { name: 'HBO Max', binance: true, yape: false, paypal: true, cash: true },
+            4: { name: 'Spotify Premium', binance: true, yape: false, paypal: true, cash: true },
+            5: { name: 'Windows 11 Pro', binance: true, yape: false, paypal: false, cash: true },
+            6: { name: 'Canva Pro', binance: true, yape: false, paypal: true, cash: true },
+            7: { name: 'Paramount +', binance: true, yape: false, paypal: true, cash: true },
+            8: { name: 'Dropbox Pro', binance: true, yape: false, paypal: true, cash: true },
+            9: { name: 'Outlook', binance: true, yape: false, paypal: false, cash: true },
+            10: { name: 'Disney+ Premium', binance: true, yape: false, paypal: true, cash: true },
+            11: { name: 'ChatGPT Plus', binance: true, yape: false, paypal: false, cash: true },
+            12: { name: 'Netflix Premium', binance: true, yape: false, paypal: true, cash: true },
+            13: { name: 'Amazon Prime Video', binance: true, yape: false, paypal: true, cash: true },
+            14: { name: 'Hulu Premium', binance: true, yape: false, paypal: true, cash: true },
+            15: { name: 'YouTube Premium', binance: true, yape: false, paypal: true, cash: true },
+            16: { name: 'Surfshark VPN', binance: true, yape: false, paypal: true, cash: true },
+            17: { name: 'Tidal Premium', binance: true, yape: false, paypal: true, cash: true },
+            18: { name: 'Grupo VIP', binance: true, yape: false, paypal: false, cash: false },
+            19: { name: 'Hma PRO VPN', binance: true, yape: false, paypal: true, cash: true },
+            20: { name: 'Eset NOD 32', binance: true, yape: false, paypal: true, cash: true },
+            21: { name: 'Claude AI', binance: true, yape: false, paypal: false, cash: true },
+            22: { name: 'CapCut PRO', binance: true, yape: false, paypal: true, cash: true }
+        };
+
+        function getServicePaymentConfig(service, method) {
+            const serviceOverride = PAYMENT_OPTIONS_BY_SERVICE_ID[service.id];
+            const override = serviceOverride && serviceOverride[method];
+            if (override === undefined) {
+                return { enabled: true, text: PAYMENT_METHODS[method].defaultText };
+            }
+            return { enabled: override, text: PAYMENT_METHODS[method].defaultText };
+        }
+
+        const STATE = {
+            orderData: {}
+        };
         let currentServiceId = null;
         let selectedPaymentMethod = null;
-        let quantity = 1;
+        let selectedMonths = 1;
+        let selectedQuantity = 1;
 
         // --- PERSISTENCIA EN localStorage ---
         const STORAGE_KEY = 'realstore_services_v1';
@@ -1448,11 +1565,9 @@
                             const savedService = parsed.find(item => item.id === defaultService.id);
                             return savedService ? { ...defaultService, ...savedService } : { ...defaultService };
                         });
-
                         const extraServices = parsed.filter(savedService =>
                             !mergedServices.some(item => item.id === savedService.id)
                         );
-
                         services = [...mergedServices, ...extraServices];
                         saveServicesToStorage();
                         return;
@@ -1465,27 +1580,30 @@
             }
         }
 
+        function getServiceIndexById(serviceId) {
+            return services.findIndex(service => service.id === serviceId);
+        }
+
+        function getServiceById(serviceId) {
+            return services.find(service => service.id === serviceId) || null;
+        }
+
         // --- RENDERIZADO DE SERVICIOS ---
         function renderServices(filteredServices) {
             const gridFull = document.getElementById('product-grid-full');
             const list = Array.isArray(filteredServices) ? filteredServices : services;
-            let htmlAll = '';
+            const sortedList = [...list].sort((a, b) => {
+                const categoryCompare = (a.category || '').localeCompare(b.category || '');
+                return categoryCompare || a.name.localeCompare(b.name);
+            });
 
-            list.forEach((p, index) => {
-                let stockClass = 'p-stock in';
-                let stockText = `${p.stock} Quedan`;
-                let disabledClass = '';
+            const htmlAll = sortedList.map(p => {
+                const stockClass = p.stock <= 0 ? 'p-stock out' : p.stock <= 3 ? 'p-stock low' : 'p-stock in';
+                const stockText = p.stock <= 0 ? 'Sin Stock' : `${p.stock} Quedan`;
+                const disabledClass = p.stock <= 0 ? 'disabled' : '';
 
-                if (p.stock <= 0) {
-                    stockClass = 'p-stock out';
-                    stockText = 'Sin Stock';
-                    disabledClass = 'disabled';
-                } else if (p.stock <= 3) {
-                    stockClass = 'p-stock low';
-                }
-
-                const productHtml = `
-                    <div class="product-card ${disabledClass}" onclick="handleServiceClick(${index})">
+                return `
+                    <div class="product-card ${disabledClass}" onclick="handleServiceClick(event, ${p.id})">
                         <div class="product-image">
                             <img src="${p.image}" class="product-img" alt="${p.name}">
                         </div>
@@ -1499,10 +1617,8 @@
                             </div>
                         </div>
                     </div>
-                `; 
-
-                htmlAll += productHtml;
-            });
+                `;
+            }).join('');
 
             if (!htmlAll) {
                 gridFull.innerHTML = '<div class="empty-search">No se encontraron servicios.</div>';
@@ -1523,7 +1639,7 @@
                 const disabledClass = p.stock <= 0 ? 'disabled' : '';
 
                 return `
-                    <div class="product-card ${disabledClass}" onclick="handleServiceClick(${services.indexOf(p)})">
+                    <div class="product-card ${disabledClass}" onclick="handleServiceClick(event, ${p.id})">
                         <div class="product-image">
                             <img src="${p.image}" class="product-img" alt="${p.name}">
                         </div>
@@ -1559,7 +1675,7 @@
                 bannerTitle.innerText = service.name;
                 bannerDescription.innerText = service.description;
                 bannerBuyBtn.innerText = `${FEATURED_BANNER.buttonTextPrefix}$${service.price.toFixed(2)}`;
-                bannerBuyBtn.setAttribute('onclick', `openModal(${services.indexOf(service)})`);
+                bannerBuyBtn.setAttribute('onclick', `openModal(${service.id})`);
                 banner.style.backgroundImage = `radial-gradient(circle at top left, rgba(0,0,0,0.35), transparent 28%), radial-gradient(circle at bottom right, rgba(0,0,0,0.35), transparent 28%), url("${service.image}")`;
                 banner.classList.remove('banner-fade');
             }, 150);
@@ -1580,7 +1696,7 @@
         // --- ACCIONES DE CLICK EN SERVICIO ---
         function performSearch(query) {
             const normalized = (query || '').trim().toLowerCase();
-            switchTab('store', null);
+            switchTab('store');
             if (!normalized) {
                 renderServices();
                 return;
@@ -1596,57 +1712,100 @@
             renderServices(filtered);
         }
 
-        function handleServiceClick(index) {
-            const service = services[index];
+        function handleServiceClick(event, serviceId) {
+            const service = getServiceById(serviceId);
+            if (!service) return;
             if (service.stock <= 0) {
-                const card = event.target.closest('.product-card');
-                card.style.animation = 'none';
-                setTimeout(() => { card.style.animation = ''; }, 10);
-                card.style.animation = 'shake 0.4s ease-in-out';
+                const card = event.currentTarget;
+                card.classList.add('shake');
+                setTimeout(() => card.classList.remove('shake'), 420);
                 return;
             }
-            openModal(index);
+            openModal(serviceId);
         }
 
-        // Animación de shake para servicios sin stock
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-8px); }
-                75% { transform: translateX(8px); }
-            }
-        `;
-        document.head.appendChild(style);
+        // --- SELECTOR DE PLAN (MESES) ---
+        function selectPlan(months, buttonElement) {
+            selectedMonths = months;
+            document.querySelectorAll('.plan-option').forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+            updatePlanDisplay();
+        }
 
-        // --- SELECTOR DE CANTIDAD ---
-        function increaseQuantity() {
-            const service = services[currentServiceId];
+        function resetModalState() {
+            selectedPaymentMethod = null;
+            selectedMonths = 1;
+            selectedQuantity = 1;
+            currentStep = 1;
+            STATE.orderData = {};
+
+            document.querySelectorAll('.pay-btn').forEach(btn => btn.classList.remove('active', 'disabled'));
+            document.getElementById('paymentInfoBox').classList.remove('show');
+            document.getElementById('paymentAddress').innerText = 'Selecciona un método de pago para ver los datos.';
+            document.getElementById('paymentQR').innerHTML = '<i class="fa-solid fa-qrcode"></i><span>QR disponible aquí</span>';
+            document.getElementById('paymentProductSummary').style.display = 'none';
+            document.getElementById('payProdName').innerText = '-';
+            document.getElementById('payProdQty').innerText = '1';
+            document.getElementById('payProdTotal').innerText = '$0.00';
+            document.getElementById('confirmProductName').innerText = '-';
+            document.getElementById('confirmProductQty').innerText = '1';
+            document.getElementById('confirmTotal').innerText = '$0.00';
+            document.getElementById('confirmPaymentMethod').innerText = '-';
+        }
+
+        function getCurrentServicePrice(service) {
+            if (!service) return 0;
+            if (service.category === 'MAIL') {
+                return service.price * selectedQuantity;
+            }
+            const monthlyPrices = service.monthlyPrices || { 1: service.price, 3: service.price * 3, 6: service.price * 6, 12: service.price * 12 };
+            return monthlyPrices[selectedMonths] || service.price;
+        }
+
+        function getCurrentQuantityText(service) {
+            if (!service) return '';
+            if (service.category === 'MAIL') {
+                return selectedQuantity;
+            }
+            return `${selectedMonths} ${selectedMonths === 1 ? 'mes' : 'meses'}`;
+        }
+
+        function updatePlanDisplay() {
+            const service = getServiceById(currentServiceId);
             if (!service) return;
-            if (quantity < service.stock) {
-                quantity++;
-                updateQuantityDisplay();
+            const price = getCurrentServicePrice(service);
+
+            const buyPriceEl = document.getElementById('buyNowPrice');
+            if (buyPriceEl) buyPriceEl.innerText = `$${price.toFixed(2)}`;
+
+            const payTotal = document.getElementById('payProdTotal');
+            if (payTotal) payTotal.innerText = `$${price.toFixed(2)}`;
+
+            if (service.category !== 'MAIL') {
+                const monthlyPrices = service.monthlyPrices || { 1: service.price, 3: service.price * 3, 6: service.price * 6, 12: service.price * 12 };
+                document.getElementById('price1m').innerText = `$${monthlyPrices[1].toFixed(0)}`;
+                document.getElementById('price3m').innerText = `$${monthlyPrices[3].toFixed(0)}`;
+                document.getElementById('price6m').innerText = `$${monthlyPrices[6].toFixed(0)}`;
+                document.getElementById('price12m').innerText = `$${monthlyPrices[12].toFixed(0)}`;
+            }
+        }
+
+        function increaseQuantity() {
+            const service = getServiceById(currentServiceId);
+            if (!service) return;
+            if (selectedQuantity < service.stock) {
+                selectedQuantity += 1;
+                document.getElementById('quantityValue').innerText = selectedQuantity;
+                updatePlanDisplay();
             }
         }
 
         function decreaseQuantity() {
-            if (quantity > 1) {
-                quantity--;
-                updateQuantityDisplay();
+            if (selectedQuantity > 1) {
+                selectedQuantity -= 1;
+                document.getElementById('quantityValue').innerText = selectedQuantity;
+                updatePlanDisplay();
             }
-        }
-
-        function updateQuantityDisplay() {
-            const service = services[currentServiceId];
-            if (!service) return;
-            const total = service.price * quantity;
-            document.getElementById('quantityValue').innerText = quantity;
-            // update buy now price
-            const buyPriceEl = document.getElementById('buyNowPrice');
-            if (buyPriceEl) buyPriceEl.innerText = `$${total.toFixed(2)}`;
-            // if payment summary visible, update it
-            const payTotal = document.getElementById('payProdTotal');
-            if (payTotal) payTotal.innerText = `$${total.toFixed(2)}`;
         }
 
         // --- MULTI-STEP MODAL HANDLERS ---
@@ -1657,17 +1816,14 @@
             document.getElementById('step1').style.display = (n === 1) ? 'block' : 'none';
             document.getElementById('paymentSection').style.display = (n === 2) ? 'block' : 'none';
             document.getElementById('confirmationSection').style.display = (n === 3) ? 'block' : 'none';
-            // update modal title
             if (n === 1) document.getElementById('modal-title').innerText = 'Confirmar Compra';
             if (n === 2) document.getElementById('modal-title').innerText = 'Elige tu método de pago';
             if (n === 3) document.getElementById('modal-title').innerText = 'Confirmar pedido';
-            // ensure Buy Now visibility/state when returning to step 1
             const buyNowBtn = document.getElementById('buyNowBtn');
             if (buyNowBtn) {
                 if (n === 1) {
                     buyNowBtn.style.display = 'block';
-                    // re-enable based on current service stock
-                    const prod = services[currentServiceId];
+                    const prod = getServiceById(currentServiceId);
                     buyNowBtn.disabled = prod ? (prod.stock <= 0) : false;
                 } else {
                     buyNowBtn.style.display = 'none';
@@ -1676,64 +1832,103 @@
         }
 
         function markPaid() {
-            // when user indicates they already paid, move to final confirmation step
-            // populate confirmation fields from current order
-            document.getElementById('confirmProductName').innerText = services[currentServiceId].name;
-            document.getElementById('confirmProductQty').innerText = quantity;
-            document.getElementById('confirmTotal').innerText = `$${(services[currentServiceId].price * quantity).toFixed(2)}`;
-            document.getElementById('confirmPaymentMethod').innerText = PAYMENT_DETAILS[selectedPaymentMethod] ? PAYMENT_DETAILS[selectedPaymentMethod].text : '-';
-            window.orderData = window.orderData || {};
-            window.orderData.service = services[currentServiceId].name;
-            window.orderData.quantity = quantity;
-            window.orderData.total = (services[currentServiceId].price * quantity).toFixed(2);
-            window.orderData.method = PAYMENT_DETAILS[selectedPaymentMethod] ? PAYMENT_DETAILS[selectedPaymentMethod].text : '';
-            window.orderData.message = `✅ *Nueva Orden - REAL Store*\n━━━━━━━━━━━━━━━━━━━━━\n🛒 Servicio: ${window.orderData.service}\n📦 Cantidad: ${window.orderData.quantity}\n💵 Total: $${window.orderData.total}\n💳 Método Pago: ${window.orderData.method}\n━━━━━━━━━━━━━━━━━━━━━\n*Incluye las pruebas de pago y tu comprobante.*`;
+            const service = getServiceById(currentServiceId);
+            if (!service) return;
+            const totalPrice = getCurrentServicePrice(service);
+            const qtyText = getCurrentQuantityText(service);
+            document.getElementById('confirmProductName').innerText = service.name;
+            document.getElementById('confirmProductQty').innerText = qtyText;
+            document.getElementById('confirmTotal').innerText = `$${totalPrice.toFixed(2)}`;
+            document.getElementById('confirmPaymentMethod').innerText = STATE.orderData?.method || '-';
+            STATE.orderData = STATE.orderData || {};
+            STATE.orderData.service = service.name;
+            STATE.orderData.quantity = qtyText;
+            STATE.orderData.total = totalPrice.toFixed(2);
+            STATE.orderData.method = STATE.orderData.method || '';
+            const orderLabel = service.category === 'MAIL' ? '📦 Cantidad' : '📅 Plan';
+            STATE.orderData.message = `✅ *Nueva Orden - REAL Store*\n━━━━━━━━━━━━━━━━━━━━━\n🛒 Servicio: ${STATE.orderData.service}\n${orderLabel}: ${STATE.orderData.quantity}\n💵 Total: $${STATE.orderData.total}\n💳 Método Pago: ${STATE.orderData.method}\n━━━━━━━━━━━━━━━━━━━━━\n*Incluye las pruebas de pago y tu comprobante.*`;
             showStep(3);
         }
 
         // --- MODAL Y PROCESO DE PAGO ---
-        function openModal(index) {
-            if (index === undefined) return;
-            currentServiceId = index;
-            const product = services[index];
-            quantity = product.stock > 0 ? 1 : 0;
+        function openModal(serviceId) {
+            if (serviceId === undefined) return;
+            currentServiceId = serviceId;
+            const product = getServiceById(serviceId);
+            if (!product) return;
+            resetModalState();
 
             document.getElementById('modal-title').innerText = "Confirmar Compra";
             document.getElementById('modal-product-name').innerText = product.name;
             document.getElementById('modal-product-price').innerText = `$${product.price.toFixed(2)}`;
 
             selectedPaymentMethod = null;
-            document.querySelectorAll('.pay-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.pay-btn').forEach(btn => {
+                btn.classList.remove('active', 'disabled');
+                const method = btn.dataset.payMethod;
+                const cfg = getServicePaymentConfig(product, method);
+                if (!cfg.enabled) {
+                    btn.classList.add('disabled');
+                }
+            });
             document.getElementById('paymentInfoBox').classList.remove('show');
             document.getElementById('paymentAddress').innerText = 'Selecciona un método de pago para ver los datos.';
             document.getElementById('paymentQR').innerHTML = '<i class="fa-solid fa-qrcode"></i><span>QR disponible aquí</span>';
+
             const buyNowBtn = document.getElementById('buyNowBtn');
             if (buyNowBtn) {
                 buyNowBtn.style.display = 'block';
                 buyNowBtn.disabled = product.stock <= 0;
             }
+
+            document.getElementById('paymentProductSummary').style.display = 'none';
+            document.getElementById('payProdName').innerText = '-';
+            document.getElementById('payProdQty').innerText = '1';
+            document.getElementById('payProdTotal').innerText = '$0.00';
+            document.getElementById('confirmProductName').innerText = '-';
+            document.getElementById('confirmProductQty').innerText = '1';
+            document.getElementById('confirmTotal').innerText = '$0.00';
+            document.getElementById('confirmPaymentMethod').innerText = '-';
+
             showStep(1);
             
-            const stockLabel = document.getElementById('modalStockLabel');
+            const stockInfo = document.getElementById('modalStockInfo');
             const stockText = document.getElementById('modalStockText');
             if (product.stock <= 0) {
-                stockLabel.className = 'p-stock out';
-                stockLabel.innerText = 'Sin Stock';
-                stockText.innerText = 'No disponible';
+                stockInfo.className = 'plan-stock out';
+                stockText.innerText = 'Sin Stock';
             } else if (product.stock <= 3) {
-                stockLabel.className = 'p-stock low';
-                stockLabel.innerText = 'Stock bajo';
+                stockInfo.className = 'plan-stock low';
                 stockText.innerText = `${product.stock} unidades restantes`;
             } else {
-                stockLabel.className = 'p-stock in';
-                stockLabel.innerText = 'En stock';
+                stockInfo.className = 'plan-stock in';
                 stockText.innerText = `${product.stock} unidades disponibles`;
             }
             // populate features view
             const featText = product.features || 'Sin descripción';
             document.getElementById('featureViewText').innerText = featText;
 
-            updateQuantityDisplay();
+            const planSelector = document.getElementById('planSelector');
+            const quantitySelector = document.getElementById('quantitySelector');
+            const planSelectorLabel = document.getElementById('planSelectorLabel');
+            const isMail = product.category === 'MAIL';
+
+            if (isMail) {
+                planSelector.style.display = 'none';
+                quantitySelector.style.display = 'flex';
+                planSelectorLabel.innerText = 'Selecciona la cantidad que deseas:';
+            } else {
+                planSelector.style.display = 'grid';
+                quantitySelector.style.display = 'none';
+                planSelectorLabel.innerText = 'Elige tu plan:';
+            }
+
+            // Reset plan selector to 1 month and quantity to 1
+            document.querySelectorAll('.plan-option').forEach((btn, idx) => {
+                btn.classList.toggle('active', idx === 0);
+            });
+            document.getElementById('quantityValue').innerText = selectedQuantity;
+            updatePlanDisplay();
             document.getElementById('purchaseModal').classList.add('open');
         }
 
@@ -1752,41 +1947,61 @@
         }
 
         function selectPayment(method, btnElement) {
-            selectedPaymentMethod = method;
-            document.querySelectorAll('.pay-btn').forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
-
+            const service = getServiceById(currentServiceId);
+            if (!service) return;
+            const methodConfig = getServicePaymentConfig(service, method);
             const infoBox = document.getElementById('paymentInfoBox');
             const addressText = document.getElementById('paymentAddress');
             const paymentIcon = document.getElementById('paymentMethodIcon');
             const qrPlaceholder = document.getElementById('paymentQR');
 
+            if (!methodConfig.enabled) {
+                document.querySelectorAll('.pay-btn').forEach(btn => btn.classList.remove('active'));
+                btnElement.classList.add('active');
+                infoBox.classList.add('show');
+                paymentIcon.className = PAYMENT_METHODS[method].icon;
+                addressText.innerText = methodConfig.text || 'Este método no está disponible para el servicio seleccionado.';
+                qrPlaceholder.innerHTML = '<i class="fa-solid fa-circle-xmark"></i><span>Este método no está habilitado para el servicio seleccionado.</span>';
+                document.getElementById('paymentProductSummary').style.display = 'none';
+                selectedPaymentMethod = null;
+                return;
+            }
+
+            selectedPaymentMethod = method;
+            document.querySelectorAll('.pay-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
             infoBox.classList.add('show');
-            paymentIcon.className = PAYMENT_DETAILS[method].icon;
-            addressText.innerText = PAYMENT_DETAILS[method].text;
+            paymentIcon.className = PAYMENT_METHODS[method].icon;
+            addressText.innerText = methodConfig.text;
 
             if (method === 'cash') {
                 qrPlaceholder.innerHTML = '<i class="fa-solid fa-hand-holding-dollar"></i><span>Pago en efectivo al recojo/entrega. No aplica QR.</span>';
+            } else if (method === 'binance') {
+                qrPlaceholder.innerHTML = '<img src="img/bep20.webp" alt="QR de Binance" class="payment-qr-image"><span>Escanea el QR de Binance o usa la dirección USDT (BEP20) para completar tu transacción.</span>';
             } else {
                 qrPlaceholder.innerHTML = '<i class="fa-solid fa-qrcode"></i><span>Escanea el QR o usa los datos de pago para completar tu transacción.</span>';
             }
 
-            // show service summary in payment step and reveal YA PAGUÉ button
-            document.getElementById('payProdName').innerText = services[currentServiceId].name;
-            document.getElementById('payProdQty').innerText = quantity;
-            document.getElementById('payProdTotal').innerText = `$${(services[currentServiceId].price * quantity).toFixed(2)}`;
+            const totalPrice = getCurrentServicePrice(service);
+            const qtyText = getCurrentQuantityText(service);
+            
+            document.getElementById('payProdName').innerText = service.name;
+            document.getElementById('payProdQty').innerText = qtyText;
+            document.getElementById('payProdTotal').innerText = `$${totalPrice.toFixed(2)}`;
             document.getElementById('paymentProductSummary').style.display = 'block';
 
-            window.orderData = window.orderData || {};
-            window.orderData.service = services[currentServiceId].name;
-            window.orderData.quantity = quantity;
-            window.orderData.total = (services[currentServiceId].price * quantity).toFixed(2);
-            window.orderData.method = PAYMENT_DETAILS[method].text;
+            STATE.orderData = {
+                service: service.name,
+                quantity: qtyText,
+                total: totalPrice.toFixed(2),
+                method: methodConfig.text
+            };
         }
 
         function sendOrder(channel) {
-            if (!window.orderData || !window.orderData.message) return;
-            const encodedMessage = encodeURIComponent(window.orderData.message);
+            if (!STATE.orderData || !STATE.orderData.message) return;
+            const encodedMessage = encodeURIComponent(STATE.orderData.message);
 
             if (channel === 'whatsapp') {
                 window.open(`https://wa.me/${CONTACT_WHATSAPP}?text=${encodedMessage}`, '_blank');
@@ -1794,8 +2009,10 @@
                 window.open(`https://t.me/${CONTACT_TELEGRAM}?text=${encodedMessage}`, '_blank');
             }
 
-            if (services[currentServiceId]) {
-                services[currentServiceId].stock = Math.max(0, (services[currentServiceId].stock || 0) - quantity);
+            const service = getServiceById(currentServiceId);
+            if (service) {
+                const quantityToRemove = service.category === 'MAIL' ? selectedQuantity : 1;
+                service.stock = Math.max(0, (service.stock || 0) - quantityToRemove);
                 saveServicesToStorage();
             }
             renderServices();
