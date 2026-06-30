@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>REAL Store</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo/favicon-16x16.png">
+    <link rel="manifest" href="logo/site.webmanifest">
     <!-- Fuente moderna -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Iconos -->
@@ -107,11 +111,14 @@
             box-shadow: none;
         }
         
-        .logo i { 
-            color: var(--accent-color); 
-            font-size: 22px;
+        .logo-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.12);
         }
-        
+
         .logo span { 
             font-weight: 800; 
             color: var(--accent-color);
@@ -1216,7 +1223,7 @@
     <div class="app-container">
         <!-- Header -->
         <header class="top-nav">
-            <div class="logo"><i class="fa-solid fa-rocket"></i> REAL <span>Store</span></div>
+            <div class="logo">REAL <span>Store</span></div>
             <div class="search-box">
                 <input id="productSearch" type="search" placeholder="Buscar servicio" oninput="performSearch(this.value)" />
                 <button class="search-btn" onclick="performSearch(document.getElementById('productSearch').value)"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -1284,7 +1291,7 @@
                     </div>
                     <div class="info-card">
                         <h3>¿Cuánto tiempo tarda la atención?</h3>
-                        <p>El soporte responde en minutos. Nuestro objetivo es darte ayuda inmediata y resolver tu compra lo antes posible, incluso fuera de horario habitual.</p>
+                        <p>Estamos arrancando, por lo que la asistencia es limitada y puede demorar unos minutos. Pero te atenderemos sí o sí. Si prefieres, puedes contactarnos por chat y hacemos toda la compra directo ahí, sin necesidad del sitio web, para que sea más rápido y sencillo.</p>
                     </div>
                     <div class="info-card" style="text-align:center; padding: 24px;">
                         <div style="font-size:62px; color:#0088cc; margin-bottom: 12px;"><i class="fa-brands fa-telegram"></i></div>
@@ -1489,13 +1496,13 @@
 
         // --- CONFIGURACIÓN DE CONTACTO (Editar aquí) ---
         const CONTACT_WHATSAPP = "51955345060";
-        const CONTACT_TELEGRAM = "@RealStrategy";
+        const CONTACT_TELEGRAM = "RealStrategy"; // Sin @ para la ruta correcta de Telegram
 
         // --- MÉTODOS DE PAGO POR DEFECTO (Editar aquí) ---
         const PAYMENT_METHODS = {
             'binance': { icon: 'fa-brands fa-binance', defaultText: 'ID: 1023938554\nUSDT (BEP20): 0xd18b1037c394194df28c486625d3d869b1b015ce' },
             'yape': { icon: 'fa-solid fa-mobile-screen-button', defaultText: 'YAPE: No operativo' },
-            'paypal': { icon: 'fa-brands fa-paypal', defaultText: 'SALDO PAYPAL: www.paypal.com/paypalme/RealStrategy\n\nTARJETA: https://www.paypal.com/donate/?hosted_button_id=UAKT647K65NFE' },
+            'paypal': { icon: 'fa-brands fa-paypal', defaultText: 'SALDO PAYPAL: www.paypal.com/paypalme/RealStrategy\n\nTARJETA: https://www.paypal.com/donate/?hosted_button_id=UAKT647K65NFE\n\nCOMISION: No olvide incluir la comisión de PayPal.' },
             'cash': { icon: 'fa-solid fa-money-bill-wave', defaultText: 'PAGO EFECTIVO: Contáctame por WhatsApp o Telegram para generar el código de PagoEfectivo.\n\nPRESIONAR YA PAGUE\nSOLO PERU' }
         };
 
@@ -2006,7 +2013,8 @@
             if (channel === 'whatsapp') {
                 window.open(`https://wa.me/${CONTACT_WHATSAPP}?text=${encodedMessage}`, '_blank');
             } else if (channel === 'telegram') {
-                window.open(`https://t.me/${CONTACT_TELEGRAM}?text=${encodedMessage}`, '_blank');
+                const telegramUsername = CONTACT_TELEGRAM.replace(/^@/, '');
+                window.open(`https://t.me/${telegramUsername}?text=${encodedMessage}`, '_blank');
             }
 
             const service = getServiceById(currentServiceId);
